@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pruebas de botones | Aguila Store</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .test-page {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 70px;
+    }
+
+    .test-header {
+      display: grid;
+      gap: 14px;
+      padding: 34px;
+      border: 1px solid rgba(11, 47, 107, 0.16);
+      border-radius: 8px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .test-header h1 {
+      max-width: none;
+      font-size: clamp(2.3rem, 7vw, 4.6rem);
+      line-height: 1;
+    }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .test-card {
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+      border: 1px solid rgba(11, 47, 107, 0.14);
+      border-radius: 8px;
+      background: white;
+      box-shadow: 0 12px 28px rgba(6, 26, 63, 0.07);
+    }
+
+    .test-card h2 {
+      font-size: 1.25rem;
+    }
+
+    .test-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .test-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .test-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 14px;
+      border-radius: 8px;
+      color: white;
+      background: var(--blue);
+      font-weight: 900;
+    }
+
+    .test-links a.external {
+      background: var(--accent);
+    }
+
+    .status-ok {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    @media (max-width: 760px) {
+      .test-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="test-page">
+    <section class="test-header">
+      <p class="eyebrow">Aguila Store QA</p>
+      <h1>Pruebas de botones</h1>
+      <p class="hero-text">Esta pagina concentra enlaces de prueba para los botones y destinos verificables de la tienda.</p>
+      <div class="test-links">
+        <a href="index.html">Volver a la tienda</a>
+      </div>
+    </section>
+
+    <section class="test-grid" aria-label="Enlaces de prueba">
+      <article class="test-card">
+        <h2>Navegacion interna</h2>
+        <p><span class="status-ok">Funcion esperada:</span> abrir secciones dentro de la pagina principal.</p>
+        <div class="test-links">
+          <a href="index.html#inicio">Inicio</a>
+          <a href="index.html#catalogo">Catalogo</a>
+          <a href="index.html#ofertas">Ofertas</a>
+          <a href="index.html#aliados">Aliados</a>
+        </div>
+      </article>
+
+      <article class="test-card">
+        <h2>Categorias</h2>
+        <p><span class="status-ok">Funcion esperada:</span> en la tienda filtran productos sin abrir otra pagina.</p>
+        <div class="test-links">
+          <a href="index.html#catalogo">Todos</a>
+          <a href="index.html#catalogo">Electronica</a>
+          <a href="index.html#catalogo">Automovil</a>
+          <a href="index.html#catalogo">Herramientas</a>
+          <a href="index.html#catalogo">Ofertas</a>
+        </div>
+      </article>
+
+      <article class="test-card">
+        <h2>Carrito y compra</h2>
+        <p><span class="status-ok">Funcion esperada:</span> abrir carrito, agregar producto, sumar/restar cantidad y finalizar pedido dentro de la tienda.</p>
+        <div class="test-links">
+          <a href="index.html#catalogo">Probar productos</a>
+          <a href="index.html#ofertas">Probar codigo AGUILAUSA</a>
+        </div>
+      </article>
+
+      <article class="test-card">
+        <h2>Aliados externos</h2>
+        <p><span class="status-ok">Funcion esperada:</span> abrir paginas externas en una nueva pestana.</p>
+        <div class="test-links">
+          <a class="external" href="https://www.amazon.com/" target="_blank" rel="noreferrer">Amazon</a>
+          <a class="external" href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
+          <a class="external" href="https://www.tiktok.com/shop" target="_blank" rel="noreferrer">TikTok Shop</a>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
