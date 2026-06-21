@@ -3,80 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aguila Store</title>
+  <title>Aguila Store 2.0</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
+  <header class="site-header">
     <a class="brand" href="#inicio" aria-label="Aguila Store inicio">
-      <img src="assets/aguila-mark.svg" alt="" class="brand-mark">
+      <img src="aguila-mark.svg" alt="" class="brand-mark">
       <span>Aguila Store</span>
     </a>
 
-    <nav class="nav-links" aria-label="Navegacion principal">
+    <nav class="desktop-nav" aria-label="Navegacion principal">
       <a href="#catalogo">Catalogo</a>
       <a href="#ofertas">Ofertas</a>
+      <a href="#por-que">Por que comprar</a>
       <a href="#aliados">Aliados</a>
     </nav>
 
-    <button class="cart-button" id="openCart" type="button" aria-label="Abrir carrito">
-      <span class="cart-icon" aria-hidden="true"></span>
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <div class="header-actions">
+      <a class="mini-link" href="https://www.amazon.com/" target="_blank" rel="noreferrer">Amazon</a>
+      <button class="cart-button" id="openCart" type="button" aria-label="Abrir carrito">
+        <span class="cart-icon" aria-hidden="true"></span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
   </header>
 
   <main>
     <section class="hero" id="inicio">
-      <div class="hero-copy">
-        <p class="eyebrow">Premium American Deals</p>
-        <h1>Aguila Store</h1>
-        <p class="hero-text">Electronica, automovil, herramientas y ofertas con energia americana: limpio, rapido y confiable.</p>
+      <div class="hero-content">
+        <p class="eyebrow">Aguila Store 2.0</p>
+        <h1>Compra con fuerza americana.</h1>
+        <p class="hero-text">Productos seleccionados para casa, garage y trabajo: tecnologia util, accesorios para auto, herramientas fuertes y ofertas listas para vender online.</p>
         <div class="hero-actions">
-          <a class="primary-link" href="#catalogo">Comprar ahora</a>
-          <a class="secondary-link" href="#ofertas">Ver ofertas</a>
+          <a class="button primary" href="#catalogo">Comprar ahora</a>
+          <a class="button ghost" href="#por-que">Por que elegirnos</a>
+        </div>
+        <div class="hero-proof" aria-label="Resumen de beneficios">
+          <span>Curado premium</span>
+          <span>Checkout rapido</span>
+          <span>Listo para GitHub Pages</span>
         </div>
       </div>
 
-      <div class="hero-showcase" aria-label="Productos destacados">
-        <div class="showcase-card electronics">
-          <span>Electronica Pro</span>
+      <div class="hero-panel" aria-label="Resumen de tienda">
+        <div class="hero-product main-device">
+          <span class="hero-tag">Featured deal</span>
+          <strong>Power, tech & garage essentials</strong>
         </div>
-        <div class="showcase-card auto">
-          <span>Garage America</span>
-        </div>
-        <div class="showcase-card tools">
-          <span>Power Tools</span>
+        <div class="hero-metrics">
+          <div>
+            <strong>8</strong>
+            <span>Productos premium</span>
+          </div>
+          <div>
+            <strong>$150+</strong>
+            <span>Envio gratis</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="stats-strip" aria-label="Beneficios de compra" id="envios">
+    <section class="trust-bar" aria-label="Beneficios">
       <div>
-        <strong>USA</strong>
-        <span>Estilo premium</span>
+        <strong>Premium USA</strong>
+        <span>Estilo rojo, blanco y azul</span>
       </div>
       <div>
-        <strong>4</strong>
-        <span>Categorias fuertes</span>
+        <strong>Envio calculado</strong>
+        <span>Gratis desde $150</span>
       </div>
       <div>
-        <strong>4.9/5</strong>
-        <span>Compra confiable</span>
+        <strong>Aliados</strong>
+        <span>Amazon, Facebook y TikTok Shop</span>
       </div>
     </section>
 
-    <section class="toolbar" id="catalogo">
+    <section class="section-heading" id="catalogo">
       <div>
-        <p class="eyebrow">Catalogo</p>
-        <h2>Productos destacados</h2>
+        <p class="eyebrow">Catalogo premium</p>
+        <h2>Equipos y ofertas para comprar mejor</h2>
       </div>
-
       <div class="controls">
         <label class="search-box">
-          <span class="search-icon" aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
           <input id="searchInput" type="search" placeholder="Buscar productos">
         </label>
-
         <select id="sortSelect" aria-label="Ordenar productos">
           <option value="featured">Destacados</option>
           <option value="priceLow">Menor precio</option>
@@ -96,30 +108,65 @@
 
     <section class="product-grid" id="productGrid" aria-live="polite"></section>
 
-    <section class="promo-band" id="ofertas">
+    <section class="offers-band" id="ofertas">
       <div>
-        <p class="eyebrow">Red, white and blue savings</p>
-        <h2>Ofertas premium en tecnologia, auto y herramientas</h2>
-        <p>Usa el codigo <strong>AGUILAUSA</strong> al finalizar tu pedido.</p>
+        <p class="eyebrow">Oferta destacada</p>
+        <h2>Activa AGUILA20 y convierte visitas en pedidos</h2>
+        <p>Promocion ideal para campanas en Amazon, Facebook y TikTok Shop.</p>
       </div>
-      <button class="primary-button" id="copyCode" type="button">Copiar codigo</button>
+      <button class="button primary" id="copyCode" type="button">Copiar codigo</button>
     </section>
 
-    <section class="partner-links" id="aliados" aria-label="Enlaces de compra y redes">
-      <a href="https://www.amazon.com/" target="_blank" rel="noreferrer">Amazon</a>
-      <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
-      <a href="https://www.tiktok.com/shop" target="_blank" rel="noreferrer">TikTok Shop</a>
+    <section class="why-buy" id="por-que" aria-label="Por que comprar en Aguila Store">
+      <div class="section-heading compact">
+        <div>
+          <p class="eyebrow">Por que comprar en Aguila Store</p>
+          <h2>Una tienda pensada para vender con confianza</h2>
+        </div>
+      </div>
+      <div class="why-grid">
+        <article>
+          <strong>Seleccion fuerte</strong>
+          <p>Catalogo enfocado en categorias de alta demanda: electronica, automovil, herramientas y ofertas.</p>
+        </article>
+        <article>
+          <strong>Experiencia rapida</strong>
+          <p>Busqueda, filtros, ordenamiento y carrito sin pasos innecesarios para que el cliente llegue al pedido.</p>
+        </article>
+        <article>
+          <strong>Estilo premium</strong>
+          <p>Diseño oscuro con acentos rojo, blanco y azul para proyectar marca moderna y americana.</p>
+        </article>
+      </div>
     </section>
   </main>
+
+  <footer class="site-footer" id="aliados">
+    <div>
+      <a class="brand footer-brand" href="#inicio" aria-label="Aguila Store inicio">
+        <img src="aguila-mark.svg" alt="" class="brand-mark">
+        <span>Aguila Store</span>
+      </a>
+      <p>Marketplace premium para tecnologia, auto, herramientas y ofertas listas para vender.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Aliados y canales</p>
+      <div class="ally-grid">
+        <a href="https://www.amazon.com/" target="_blank" rel="noreferrer">Amazon</a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
+        <a href="https://www.tiktok.com/shop" target="_blank" rel="noreferrer">TikTok Shop</a>
+      </div>
+    </div>
+  </footer>
 
   <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Carrito de compras">
     <div class="drawer-panel">
       <div class="drawer-header">
         <div>
-          <p class="eyebrow">Tu compra</p>
+          <p class="eyebrow">Checkout</p>
           <h2>Carrito</h2>
         </div>
-        <button class="icon-button" id="closeCart" type="button" aria-label="Cerrar carrito">x</button>
+        <button class="close-button" id="closeCart" type="button" aria-label="Cerrar carrito">x</button>
       </div>
 
       <div class="cart-items" id="cartItems"></div>
@@ -137,7 +184,7 @@
           <span>Total</span>
           <strong id="total">$0.00</strong>
         </div>
-        <button class="primary-button checkout-button" id="checkoutButton" type="button">Finalizar pedido</button>
+        <button class="button primary checkout-button" id="checkoutButton" type="button">Finalizar pedido</button>
         <p class="checkout-message" id="checkoutMessage" role="status"></p>
       </div>
     </div>
@@ -145,15 +192,13 @@
 
   <template id="productTemplate">
     <article class="product-card">
-      <div class="product-art">
+      <div class="product-media">
         <span class="badge"></span>
-        <div class="product-visual"></div>
+        <div class="product-shape"></div>
       </div>
       <div class="product-info">
-        <div>
-          <p class="category"></p>
-          <h3></h3>
-        </div>
+        <p class="category"></p>
+        <h3></h3>
         <p class="description"></p>
         <div class="product-meta">
           <span class="rating"></span>
@@ -164,6 +209,6 @@
     </article>
   </template>
 
-  <script src="js/app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
