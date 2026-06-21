@@ -1,90 +1,90 @@
 const products = [
   {
-    id: "eagle-soundbar",
-    name: "Eagle Soundbar 360",
+    id: "eagle-audio-deck",
+    name: "Eagle Audio Deck",
     category: "Electronica",
-    description: "Barra de sonido premium con bajos profundos y conexion Bluetooth.",
+    description: "Sistema de sonido compacto con graves potentes y conexion Bluetooth.",
     price: 189,
     rating: 4.9,
     badge: "Premium",
     type: "electronics",
-    color: "#0b2f6b",
-    art: "linear-gradient(145deg, #ffffff, #dce8ff 45%, #0b2f6b)"
+    shape: "linear-gradient(145deg, #ffffff, #0b3b82 72%)",
+    art: "linear-gradient(145deg, #ffffff 0%, #d8e8ff 44%, #0b3b82 100%)"
   },
   {
-    id: "smart-hub",
-    name: "Smart Home Hub",
+    id: "smart-home-command",
+    name: "Smart Home Command",
     category: "Electronica",
-    description: "Centro inteligente para luces, camaras y dispositivos del hogar.",
+    description: "Centro inteligente para controlar luces, camaras y accesorios del hogar.",
     price: 129,
     rating: 4.7,
     badge: "Nuevo",
     type: "electronics",
-    color: "#d71920",
-    art: "linear-gradient(145deg, #ffffff, #f7d9dc 45%, #d71920)"
+    shape: "linear-gradient(145deg, #ffffff, #df1f2d 72%)",
+    art: "linear-gradient(145deg, #ffffff 0%, #ffe1e4 44%, #df1f2d 100%)"
   },
   {
-    id: "dash-cam-pro",
-    name: "Dash Cam Pro",
+    id: "dash-cam-elite",
+    name: "Dash Cam Elite",
     category: "Automovil",
     description: "Camara para auto con vision nocturna, GPS y grabacion continua.",
     price: 96,
     rating: 4.8,
     badge: "Auto",
     type: "auto",
-    color: "#0b2f6b",
-    art: "linear-gradient(145deg, #ffffff, #dce8ff 42%, #123c7c)"
+    shape: "#0b3b82",
+    art: "linear-gradient(145deg, #ffffff 0%, #d8e8ff 42%, #0b3b82 100%)"
   },
   {
-    id: "car-detail-kit",
-    name: "Car Detail Kit",
+    id: "garage-detail-kit",
+    name: "Garage Detail Kit",
     category: "Automovil",
-    description: "Kit de limpieza con espuma, microfibras y acabado brillante.",
+    description: "Kit de limpieza automotriz con espuma, microfibra y acabado brillante.",
     price: 58,
     rating: 4.6,
     badge: "Best",
     type: "auto",
-    color: "#d71920",
-    art: "linear-gradient(145deg, #ffffff, #ffe4e6 46%, #d71920)"
+    shape: "#df1f2d",
+    art: "linear-gradient(145deg, #ffffff 0%, #ffe1e4 46%, #df1f2d 100%)"
   },
   {
-    id: "impact-driver",
-    name: "Impact Driver Max",
+    id: "impact-driver-pro",
+    name: "Impact Driver Pro",
     category: "Herramientas",
     description: "Atornillador de impacto con torque alto y bateria de larga duracion.",
     price: 149,
     rating: 4.8,
     badge: "Pro",
     type: "tool",
-    color: "#0b2f6b",
-    art: "linear-gradient(145deg, #ffffff, #dce8ff 42%, #0b2f6b)"
+    shape: "#0b3b82",
+    art: "linear-gradient(145deg, #ffffff 0%, #d8e8ff 42%, #0b3b82 100%)"
   },
   {
-    id: "garage-toolbox",
-    name: "Garage Toolbox",
+    id: "steel-toolbox",
+    name: "Steel Garage Toolbox",
     category: "Herramientas",
-    description: "Caja metalica compacta con organizadores para taller y garage.",
+    description: "Caja metalica premium con organizadores para taller y garage.",
     price: 74,
     rating: 4.5,
     badge: "Garage",
-    type: "toolbox",
-    color: "#d71920",
-    art: "linear-gradient(145deg, #ffffff, #ffe4e6 45%, #b8141a)"
+    type: "tool",
+    shape: "#df1f2d",
+    art: "linear-gradient(145deg, #ffffff 0%, #ffe1e4 45%, #a91520 100%)"
   },
   {
-    id: "weekend-bundle",
-    name: "Weekend Bundle",
+    id: "weekend-power-bundle",
+    name: "Weekend Power Bundle",
     category: "Ofertas",
-    description: "Paquete especial con accesorios de tecnologia y auto para ahorrar mas.",
+    description: "Paquete de ahorro con accesorios de tecnologia, auto y herramientas.",
     price: 99,
     rating: 4.4,
     badge: "Oferta",
     type: "deal",
-    color: "#d71920",
-    art: "linear-gradient(145deg, #0b2f6b, #ffffff 48%, #d71920)"
+    shape: "#df1f2d",
+    art: "linear-gradient(145deg, #0b3b82 0%, #ffffff 48%, #df1f2d 100%)"
   },
   {
-    id: "american-saver",
+    id: "american-saver-pack",
     name: "American Saver Pack",
     category: "Ofertas",
     description: "Seleccion de alta rotacion con precio reducido por tiempo limitado.",
@@ -92,8 +92,8 @@ const products = [
     rating: 4.6,
     badge: "Hot",
     type: "deal",
-    color: "#0b2f6b",
-    art: "linear-gradient(145deg, #d71920, #ffffff 45%, #0b2f6b)"
+    shape: "#0b3b82",
+    art: "linear-gradient(145deg, #df1f2d 0%, #ffffff 45%, #0b3b82 100%)"
   }
 ];
 
@@ -156,7 +156,7 @@ function renderProducts() {
     const card = productTemplate.content.firstElementChild.cloneNode(true);
     card.dataset.type = product.type;
     card.style.setProperty("--art-bg", product.art);
-    card.style.setProperty("--shape", product.color);
+    card.style.setProperty("--shape", product.shape);
     card.querySelector(".badge").textContent = product.badge;
     card.querySelector(".category").textContent = product.category;
     card.querySelector("h3").textContent = product.name;
@@ -173,8 +173,7 @@ function addToCart(productId) {
   state.cart.set(productId, current + 1);
   checkoutMessage.textContent = "";
   renderCart();
-  cartDrawer.classList.add("open");
-  cartDrawer.setAttribute("aria-hidden", "false");
+  openCartPanel();
 }
 
 function updateQuantity(productId, change) {
@@ -189,6 +188,16 @@ function updateQuantity(productId, change) {
 
   checkoutMessage.textContent = "";
   renderCart();
+}
+
+function openCartPanel() {
+  cartDrawer.classList.add("open");
+  cartDrawer.setAttribute("aria-hidden", "false");
+}
+
+function closeCartPanel() {
+  cartDrawer.classList.remove("open");
+  cartDrawer.setAttribute("aria-hidden", "true");
 }
 
 function renderCart() {
@@ -226,7 +235,7 @@ function renderCart() {
     cartItems.innerHTML = '<p class="empty-cart">Tu carrito esta vacio. Agrega productos del catalogo para comenzar.</p>';
   }
 
-  const shippingValue = subtotalValue > 0 && subtotalValue < 120 ? 9 : 0;
+  const shippingValue = subtotalValue > 0 && subtotalValue < 150 ? 12 : 0;
   cartCount.textContent = itemCount;
   subtotal.textContent = money.format(subtotalValue);
   shipping.textContent = shippingValue === 0 ? "Gratis" : money.format(shippingValue);
@@ -253,20 +262,12 @@ sortSelect.addEventListener("change", (event) => {
   renderProducts();
 });
 
-openCart.addEventListener("click", () => {
-  cartDrawer.classList.add("open");
-  cartDrawer.setAttribute("aria-hidden", "false");
-});
-
-closeCart.addEventListener("click", () => {
-  cartDrawer.classList.remove("open");
-  cartDrawer.setAttribute("aria-hidden", "true");
-});
+openCart.addEventListener("click", openCartPanel);
+closeCart.addEventListener("click", closeCartPanel);
 
 cartDrawer.addEventListener("click", (event) => {
   if (event.target === cartDrawer) {
-    cartDrawer.classList.remove("open");
-    cartDrawer.setAttribute("aria-hidden", "true");
+    closeCartPanel();
   }
 });
 
@@ -274,15 +275,15 @@ checkoutButton.addEventListener("click", () => {
   if (!state.cart.size) return;
   state.cart.clear();
   renderCart();
-  checkoutMessage.textContent = "Pedido recibido. Gracias por comprar en Aguila Store.";
+  checkoutMessage.textContent = "Pedido recibido. Gracias por comprar en Aguila Store 2.0.";
 });
 
 copyCode.addEventListener("click", async () => {
   try {
-    await navigator.clipboard.writeText("AGUILAUSA");
+    await navigator.clipboard.writeText("AGUILA20");
     copyCode.textContent = "Codigo copiado";
   } catch {
-    copyCode.textContent = "AGUILAUSA";
+    copyCode.textContent = "AGUILA20";
   }
 
   window.setTimeout(() => {
