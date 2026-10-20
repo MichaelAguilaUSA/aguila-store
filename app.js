@@ -25,12 +25,31 @@ const products = [
   }
 ];
 
+const CART_STORAGE_KEY = "aguila-store-cart-v1";
+function loadSavedCart() {
+  try {
+    const entries = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || "[]");
+    if (!Array.isArray(entries)) return new Map();
+    return new Map(entries.filter(([id, qty]) =>
+      products.some(product => product.id === id) && Number.isSafeInteger(qty) && qty > 0
+    ));
+  } catch {
+    return new Map();
+  }
+}
 const state = {
   category: "Todos",
   query: "",
   sort: "featured",
-  cart: new Map()
+  cart: loadSavedCart()
 };
+function saveCart() {
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify([...state.cart]));
+  } catch {
+    // El carrito sigue funcionando si el navegador bloquea almacenamiento.
+  }
+}
 
 const productGrid = document.querySelector("#productGrid");
 const productTemplate = document.querySelector("#productTemplate");
@@ -48,6 +67,8 @@ const total = document.querySelector("#total");
 const checkoutButton = document.querySelector("#checkoutButton");
 const checkoutMessage = document.querySelector("#checkoutMessage");
 const copyCode = document.querySelector("#copyCode");
+const clearCartButton = document.querySelector("#clearCart");
+const cartFinalNote = document.querySelector("#cartFinalNote");
 
 // Pago seguro: el carrito pide la sesión al servicio de pedidos y redirige
 // a Stripe Checkout. La clave secreta NUNCA está en este archivo.
@@ -178,6 +199,7 @@ function renderProducts() {
 function addToCart(productId) {
   const current = state.cart.get(productId) || 0;
   state.cart.set(productId, current + 1);
+  saveCart();
   checkoutMessage.textContent = "";
   renderCart();
   openCartPanel();
@@ -193,18 +215,31 @@ function updateQuantity(productId, change) {
     state.cart.set(productId, next);
   }
 
+  saveCart();
   checkoutMessage.textContent = "";
   renderCart();
 }
 
+function clearCart() {
+  state.cart.clear();
+  saveCart();
+  renderCart();
+}
+
 function openCartPanel() {
+  cartDrawer.inert = false;
   cartDrawer.classList.add("open");
   cartDrawer.setAttribute("aria-hidden", "false");
+  cartDrawer.setAttribute("aria-modal", "true");
+  closeCart.focus();
 }
 
 function closeCartPanel() {
   cartDrawer.classList.remove("open");
   cartDrawer.setAttribute("aria-hidden", "true");
+  cartDrawer.removeAttribute("aria-modal");
+  if (cartDrawer.contains(document.activeElement)) openCart.focus();
+  cartDrawer.inert = true;
 }
 
 function renderCart() {
@@ -225,16 +260,24 @@ function renderCart() {
         <h3>${product.name}</h3>
         <p>${money.format(product.price)} x ${quantity}</p>
       </div>
-      <div class="quantity">
-        <button type="button" aria-label="Quitar ${product.name}">-</button>
-        <strong>${quantity}</strong>
-        <button type="button" aria-label="Agregar ${product.name}">+</button>
+      <div class="cart-line-actions">
+        <div class="quantity">
+          <button type="button" aria-label="Quitar una unidad de ${product.name}">−</button>
+          <strong aria-label="${quantity} paquetes">${quantity}</strong>
+          <button type="button" aria-label="Agregar una unidad de ${product.name}">+</button>
+        </div>
+        <button type="button" class="remove-cart-line" aria-label="Eliminar ${product.name} del carrito">Eliminar</button>
       </div>
     `;
 
-    const [decrease, increase] = line.querySelectorAll("button");
+    const [decrease, increase] = line.querySelectorAll(".quantity button");
     decrease.addEventListener("click", () => updateQuantity(product.id, -1));
     increase.addEventListener("click", () => updateQuantity(product.id, 1));
+    line.querySelector(".remove-cart-line").addEventListener("click", () => {
+      state.cart.delete(product.id);
+      saveCart();
+      renderCart();
+    });
     cartItems.append(line);
   });
 
@@ -242,11 +285,14 @@ function renderCart() {
     cartItems.innerHTML = '<p class="empty-cart">Tu carrito esta vacio. Agrega productos del catalogo para comenzar.</p>';
   }
 
-  const shippingValue = 0;
   cartCount.textContent = itemCount;
   subtotal.textContent = money.format(subtotalValue);
-  shipping.textContent = "Por calcular";
-  total.textContent = `${money.format(subtotalValue)} + envío por calcular`;
+  shipping.textContent = "A confirmar";
+  total.textContent = "Pendiente";
+  clearCartButton.disabled = itemCount === 0;
+  cartFinalNote.textContent = itemCount
+    ? `Productos: ${money.format(subtotalValue)}. El envío y los impuestos aplicables se confirmarán antes de permitir el pago.`
+    : "El importe total se mostrará antes de habilitar las compras.";
   if (CHECKOUT_ENABLED) {
     checkoutButton.disabled = !itemCount;
     checkoutButton.textContent = "Finalizar pedido";
@@ -279,6 +325,11 @@ sortSelect.addEventListener("change", (event) => {
 checkoutButton.addEventListener("click", () => { if (CHECKOUT_ENABLED) startCheckout(); });
 openCart.addEventListener("click", openCartPanel);
 closeCart.addEventListener("click", closeCartPanel);
+clearCartButton.addEventListener("click", clearCart);
+cartDrawer.inert = true;
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && cartDrawer.classList.contains("open")) closeCartPanel();
+});
 
 cartDrawer.addEventListener("click", (event) => {
   if (event.target === cartDrawer) {
