@@ -30,19 +30,28 @@ function validateCart(items) {
   if (!Array.isArray(items) || items.length === 0) {
     return { ok: false, error: "El carrito está vacío." };
   }
+  if (items.length > Object.keys(CATALOG).length) {
+    return { ok: false, error: "Demasiados productos en el carrito." };
+  }
+  const seen = new Set();
   let totalUnits = 0;
   const lineItems = [];
   const summary = [];
   for (const item of items) {
-    const product = CATALOG[item && item.id];
-    const qty = parseInt(item && item.qty, 10);
-    if (!product) return { ok: false, error: "Producto no autorizado." };
-    if (!Number.isFinite(qty) || qty < 1 || qty > 20) {
+    if (!item || typeof item !== "object" || Array.isArray(item) || typeof item.id !== "string") {
+      return { ok: false, error: "Línea del carrito no válida." };
+    }
+    const product = Object.hasOwn(CATALOG, item.id) ? CATALOG[item.id] : null;
+    if (!product || seen.has(item.id)) {
+      return { ok: false, error: "Producto no autorizado o duplicado." };
+    }
+    seen.add(item.id);
+    if (!Number.isSafeInteger(item.qty) || item.qty < 1 || item.qty > 20) {
       return { ok: false, error: "Cantidad no válida." };
     }
-    totalUnits += product.unitsPerPack * qty;
-    lineItems.push({ price: product.stripePriceId, quantity: qty });
-    summary.push({ id: item.id, qty, units: product.unitsPerPack * qty });
+    totalUnits += product.unitsPerPack * item.qty;
+    lineItems.push({ price: product.stripePriceId, quantity: item.qty });
+    summary.push({ id: item.id, qty: item.qty, units: product.unitsPerPack * item.qty });
   }
   if (totalUnits > availableUnits()) {
     return { ok: false, error: "Cantidad superior al inventario vigente." };
