@@ -51,3 +51,56 @@ jobs:
             console.log('SEGURIDAD OK: sin cobros, CORS correcto, cantidades validas y rechazo de carrito manipulado');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
+      - name: Validar firma y comprobante sin falsas confirmaciones
+        run: |
+          node <<'NODE'
+          const assert=require('node:assert/strict');
+          const fs=require('node:fs');
+          process.env.CHECKOUT_SERVICE_ENABLED='true';
+          process.env.CHECKOUT_MODE='test';
+          process.env.STRIPE_SECRET_KEY='sk_test_unit_fake';
+          process.env.STRIPE_WEBHOOK_SECRET='whsec_unit_only';
+          const Stripe=require('stripe');
+          const stripe=new Stripe(process.env.STRIPE_SECRET_KEY);
+          const {handler}=require('./netlify/functions/stripe-webhook');
+          function signed(livemode, status) {
+            const id=livemode?'cs_live_fake123':'cs_test_fake123';
+            const payload=JSON.stringify({id:'evt_test_001',type:'checkout.session.completed',livemode,
+              data:{object:{id,livemode,mode:'payment',payment_status:status,
+                amount_total:1698,currency:'usd',customer_details:{email:'should-not-be-logged@example.invalid'},
+                shipping_details:{address:{line1:'must-not-be-logged'}}}}});
+            const sig=stripe.webhooks.generateTestHeaderString({
+              payload,secret:process.env.STRIPE_WEBHOOK_SECRET
+            });
+            return {httpMethod:'POST',headers:{'stripe-signature':sig},body:payload};
+          }
+          (async()=>{
+            let res=await handler({httpMethod:'POST',headers:{},body:'{}'});
+            assert.equal(res.statusCode,400);
+            res=await handler(signed(true,'paid'));
+            assert.equal(res.statusCode,403,'evento LIVE rechazado');
+            let logs=[];
+            const original=console.log;
+            console.log=(...args)=>logs.push(args.join(' '));
+            try {
+              res=await handler(signed(false,'unpaid'));
+              assert.equal(res.statusCode,200);
+              assert.equal(logs.length,0,'pago pendiente no genera registro');
+              res=await handler(signed(false,'paid'));
+              assert.equal(res.statusCode,200);
+              assert.equal(logs.length,1,'solo diagnóstico firmado de test');
+              assert.ok(logs[0].includes('PAGO_TEST_VERIFICADO_SIN_PEDIDO'));
+              assert.ok(!logs[0].includes('should-not-be-logged'));
+              assert.ok(!logs[0].includes('must-not-be-logged'));
+            } finally { console.log=original; }
+            process.env.CHECKOUT_MODE='live';
+            const {handler:checkout}=require('./netlify/functions/create-checkout-session');
+            res=await checkout({httpMethod:'POST',headers:{origin:'https://michaelaguilausa.github.io'},
+              body:JSON.stringify({items:[{id:'orejeras-fleece-2',qty:1}]})});
+            assert.equal(res.statusCode,503,'Checkout no admite cobros LIVE');
+            const thanks=fs.readFileSync('gracias.html','utf8');
+            assert.ok(thanks.includes('pendiente de verificación'));
+            assert.ok(!thanks.includes('Tu pago fue confirmado por Stripe'));
+            console.log('WEBHOOK Y CONFIRMACION OK: firma TEST, LIVE rechazado, sin PII y sin pedidos falsos');
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
