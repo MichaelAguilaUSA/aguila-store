@@ -1,0 +1,42 @@
+name: Auditoria visual AGUILA STORE
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'modern.css'
+      - 'styles.css'
+      - 'app.js'
+      - 'images/**'
+      - '*.html'
+      - 'scripts/ui-smoke.cjs'
+      - '.github/workflows/visual-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visual:
+    name: Escritorio y móvil (sin pagos)
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Descargar propuesta
+        uses: actions/checkout@v4
+      - name: Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Preparar prueba de navegador
+        run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Comprobar diseño, fotos y carrito
+        run: node scripts/ui-smoke.cjs
+      - name: Guardar capturas de pantalla
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aguila-store-vistas-pendientes-aprobacion
+          path: artifacts/visual-check/
+          if-no-files-found: warn
