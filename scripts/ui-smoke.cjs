@@ -37,6 +37,7 @@ async function testViewport(name, width, height) {
   try {
     await page.goto(ROOT + "/index.html", {waitUntil: "networkidle"});
     await page.locator("#productGrid .product-card").first().waitFor();
+    await page.evaluate(async () => { await Promise.all([...document.images].map(async img => { img.loading = "eager"; if (!img.complete) await new Promise(resolve => { img.addEventListener("load", resolve, {once:true}); img.addEventListener("error", resolve, {once:true}); }); })); });
     const result = await page.evaluate(() => ({
       background: getComputedStyle(document.body).backgroundColor,
       pageWidth: document.documentElement.scrollWidth,
@@ -67,7 +68,7 @@ async function testViewport(name, width, height) {
 (async() => {
   try {
     await waitForServer();
-    browser = await chromium.launch({channel: "chrome", headless: true, args: ["--no-sandbox"]});
+    browser = await chromium.launch({headless: true, args: ["--no-sandbox"]});
     await testViewport("escritorio-1440", 1440, 900);
     await testViewport("movil-390", 390, 844);
     const page = await browser.newPage({viewport: {width: 390, height: 844}});
