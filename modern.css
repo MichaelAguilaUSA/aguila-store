@@ -437,3 +437,6 @@ body:has(.gallery-lightbox:target) .gallery-grid {
   animation: none;
   transition: none;
 }
+
+/* Impedir arrastre nativo de miniatura y enlace; evita la imagen fantasma del cursor en escritorio. */
+.gallery-grid .gallery-photo-link,.gallery-grid .gallery-photo-link img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
