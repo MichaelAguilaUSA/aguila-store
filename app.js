@@ -84,7 +84,7 @@ function renderProducts() {
     const card = productTemplate.content.firstElementChild.cloneNode(true);
     card.dataset.type = product.type;
     card.style.setProperty("--art-bg", "#ffffff");
-    card.querySelector(".product-media").insertAdjacentHTML("beforeend", `<img class="product-photo" src="${product.image}" alt="${product.imageAlt}" loading="lazy">`);
+    card.querySelector(".product-media").insertAdjacentHTML("beforeend", `<img class="product-photo" src="${product.image}?v=20261020-2" alt="${product.imageAlt}" loading="eager" decoding="async">`);
     card.querySelector(".badge").textContent = product.badge;
     card.querySelector(".category").textContent = product.category;
     card.querySelector("h3").textContent = product.name;
