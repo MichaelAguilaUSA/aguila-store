@@ -38,6 +38,20 @@ jobs:
               console.log(name+' VERSION PUBLICA: '+response.status());
               const links=page.locator('.gallery-grid a.gallery-photo-link');
               assert.equal(await links.count(),4,'Deben existir cuatro enlaces en la galeria');
+              const dragInfo = await page.evaluate(() => [...document.querySelectorAll('.gallery-grid .gallery-photo-link')].map(link => ({
+                anchorDraggable: link.getAttribute('draggable'),
+                imageDraggable: link.querySelector('img')?.getAttribute('draggable'),
+                anchorCSS: getComputedStyle(link).getPropertyValue('-webkit-user-drag'),
+                imageCSS: getComputedStyle(link.querySelector('img')).getPropertyValue('-webkit-user-drag')
+              })));
+              assert.equal(dragInfo.length,4);
+              for (const item of dragInfo) {
+                assert.equal(item.anchorDraggable,'false',name+' enlace no arrastrable');
+                assert.equal(item.imageDraggable,'false',name+' imagen no arrastrable');
+                assert.equal(item.anchorCSS.trim(),'none',name+' CSS de enlace bloquea arrastre');
+                assert.equal(item.imageCSS.trim(),'none',name+' CSS de imagen bloquea arrastre');
+              }
+              console.log(name+' CUATRO FOTOS SIN ARRASTRE NATIVO - OK');
               for (let i=0;i<4;i++){
                 const link=links.nth(i);
                 const href=await link.getAttribute('href');
