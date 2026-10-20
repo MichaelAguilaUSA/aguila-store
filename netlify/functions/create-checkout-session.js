@@ -22,6 +22,14 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, headers: CORS, body: "Method Not Allowed" };
   }
+  // No generar sesiones si todavía no existe una tarifa de envío aprobada.
+  if (!process.env.SHIPPING_RATE_ID) {
+    return {
+      statusCode: 503,
+      headers: CORS,
+      body: JSON.stringify({ error: "La tarifa de envío aún no está configurada." })
+    };
+  }
   if (!process.env.STRIPE_SECRET_KEY || !process.env.SITE_URL) {
     return {
       statusCode: 500,
@@ -54,9 +62,7 @@ exports.handler = async (event) => {
     // Impuestos automáticos DESACTIVADOS a propósito:
     // no se activan sin la aprobación expresa de Michael (PASO 3).
   };
-  if (process.env.SHIPPING_RATE_ID) {
-    sessionParams.shipping_options = [{ shipping_rate: process.env.SHIPPING_RATE_ID }];
-  }
+  sessionParams.shipping_options = [{ shipping_rate: process.env.SHIPPING_RATE_ID }];
 
   const session = await stripe.checkout.sessions.create(sessionParams);
   return {
