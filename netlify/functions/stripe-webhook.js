@@ -17,12 +17,13 @@ exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
     return { statusCode: 405, body: "Method Not Allowed" };
   }
+  if (process.env.CHECKOUT_MODE !== "test" || process.env.CHECKOUT_SERVICE_ENABLED !== "true" || !/^(sk|rk)_test_/.test(process.env.STRIPE_SECRET_KEY || "")) { return { statusCode: 503, body: "Webhook no habilitado para producción." }; }
   if (!process.env.STRIPE_SECRET_KEY || !process.env.STRIPE_WEBHOOK_SECRET) {
     return { statusCode: 500, body: "Webhook no configurado." };
   }
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-  const signature = event.headers["stripe-signature"];
+  const signature = event.headers?.["stripe-signature"] || event.headers?.["Stripe-Signature"];
   const rawBody = event.isBase64Encoded
     ? Buffer.from(event.body, "base64").toString("utf8")
     : event.body;
