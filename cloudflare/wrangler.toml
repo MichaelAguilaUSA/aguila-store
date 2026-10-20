@@ -1,0 +1,20 @@
+name = "aguila-store-checkout-test"
+main = "src/index.mjs"
+compatibility_date = "2026-10-20"
+workers_dev = true
+
+[vars]
+SITE_URL = "https://michaelaguilausa.github.io/aguila-store"
+CHECKOUT_SERVICE_ENABLED = "false"
+CHECKOUT_MODE = "test"
+INVENTARIO_UNIDADES = "100"
+
+# Tras crear D1 en Cloudflare, agregar un binding DB:
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "aguila-store-test-orders"
+# database_id = "<ID_REAL_ASIGNADO_POR_CLOUDFLARE>"
+#
+# Los secretos de Stripe se configuran SOLO en Cloudflare:
+# STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET,
+# STRIPE_PRICE_PACK2, STRIPE_PRICE_PACK3, SHIPPING_RATE_ID
