@@ -111,13 +111,52 @@ function renderProducts() {
     const card = productTemplate.content.firstElementChild.cloneNode(true);
     card.dataset.type = product.type;
     card.style.setProperty("--art-bg", "#ffffff");
-    card.querySelector(".product-media").insertAdjacentHTML("beforeend", `<img class="product-photo" src="${product.image}?v=20261020-3" alt="${product.imageAlt}" loading="eager" decoding="async">`);
+    const media = card.querySelector(".product-media");
+    const mainPhoto = document.createElement("img");
+    mainPhoto.className = "product-photo";
+    mainPhoto.src = `${product.image}?v=20261020-3`;
+    mainPhoto.alt = product.imageAlt;
+    mainPhoto.loading = "eager";
+    mainPhoto.decoding = "async";
+    media.append(mainPhoto);
     card.querySelector(".badge").textContent = product.badge;
-    card.querySelector(".category").textContent = product.category;
-    card.querySelector("h3").textContent = product.name;
-    card.querySelector(".description").textContent = product.description;
-    card.querySelector(".rating").textContent = "Colores surtidos";
+    card.querySelector(".category").textContent = "FLEECE EAR MUFFS · ADULTOS";
+    card.querySelector("h3").textContent = `Orejeras fleece — ${product.badge}`;
+    card.querySelector(".product-pack-count").textContent =
+      product.id === "orejeras-fleece-2" ? "Incluye 2 unidades completas" : "Incluye 3 unidades completas";
+    card.querySelector(".description").textContent =
+      "Suaves orejeras de tejido polar para adulto. Se usan con la banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad.";
     card.querySelector(".price").textContent = money.format(product.price);
+
+    const views = [
+      {src: product.image, alt: product.imageAlt, label: "Vista principal"},
+      {src: "images/orejeras-vino.webp", alt: "Orejeras de tejido polar en color rojo vino", label: "Rojo vino"},
+      {src: "images/orejeras-camionero.webp", alt: "Orejeras negras colocadas detrás de la cabeza, fotografía del producto en uso", label: "En uso"}
+    ];
+    const gallery = card.querySelector(".product-thumbnails");
+    views.forEach((view, index) => {
+      const thumb = document.createElement("button");
+      thumb.type = "button";
+      thumb.className = `product-thumbnail${index === 0 ? " is-active" : ""}`;
+      thumb.setAttribute("aria-label", `Mostrar imagen: ${view.label}`);
+      thumb.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+      const img = document.createElement("img");
+      img.src = view.src;
+      img.alt = "";
+      img.loading = "lazy";
+      thumb.append(img);
+      thumb.addEventListener("click", () => {
+        mainPhoto.src = view.src;
+        mainPhoto.alt = view.alt;
+        gallery.querySelectorAll("button").forEach(b => {
+          const selected = b === thumb;
+          b.classList.toggle("is-active", selected);
+          b.setAttribute("aria-pressed", String(selected));
+        });
+      });
+      gallery.append(thumb);
+    });
+
     card.querySelector(".add-button").addEventListener("click", () => addToCart(product.id));
     productGrid.append(card);
   });
