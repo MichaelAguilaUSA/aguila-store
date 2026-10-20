@@ -63,6 +63,7 @@ const cartItems = document.querySelector("#cartItems");
 const cartCount = document.querySelector("#cartCount");
 const subtotal = document.querySelector("#subtotal");
 const shipping = document.querySelector("#shipping");
+const taxAmount = document.querySelector("#taxAmount");
 const total = document.querySelector("#total");
 const checkoutButton = document.querySelector("#checkoutButton");
 const checkoutMessage = document.querySelector("#checkoutMessage");
@@ -242,6 +243,9 @@ function closeCartPanel() {
   cartDrawer.inert = true;
 }
 
+// Vista previa conforme a la política de envío publicada: no configura tarifas de Stripe.
+const PUBLISHED_US_SHIPPING_CENTS = 399;
+
 function renderCart() {
   cartItems.innerHTML = "";
   let itemCount = 0;
@@ -287,12 +291,16 @@ function renderCart() {
 
   cartCount.textContent = itemCount;
   subtotal.textContent = money.format(subtotalValue);
-  shipping.textContent = "A confirmar";
-  total.textContent = "Pendiente";
+  const subtotalCents = Math.round(subtotalValue * 100);
+  const shippingCents = itemCount ? PUBLISHED_US_SHIPPING_CENTS : 0;
+  const previewTotal = (subtotalCents + shippingCents) / 100;
+  shipping.textContent = money.format(shippingCents / 100);
+  taxAmount.textContent = itemCount ? "Por calcular" : "$0.00";
+  total.textContent = money.format(previewTotal);
   clearCartButton.disabled = itemCount === 0;
   cartFinalNote.textContent = itemCount
-    ? `Productos: ${money.format(subtotalValue)}. El envío y los impuestos aplicables se confirmarán antes de permitir el pago.`
-    : "El importe total se mostrará antes de habilitar las compras.";
+    ? "Importe estimado para EE. UU., sin impuestos. Envío según tarifa de $3.99 publicada; pendiente de validación antes de habilitar las compras. El total definitivo se confirmará antes de pagar."
+    : "Añade productos para ver el subtotal, envío y total estimado.";
   if (CHECKOUT_ENABLED) {
     checkoutButton.disabled = !itemCount;
     checkoutButton.textContent = "Finalizar pedido";
