@@ -66,8 +66,9 @@
 
     <section class="section-heading" id="catalogo">
       <div>
-        <p class="eyebrow">Catalogo premium</p>
-        <h2>Orejeras de invierno para adultos</h2>
+        <p class="eyebrow">COLECCIÓN DE INVIERNO</p>
+        <h2>Elige tu paquete de orejeras</h2>
+        <p class="catalog-subtitle">Mismo modelo para adulto, dos presentaciones. Elige la cantidad que necesitas.</p>
       </div>
       <div class="controls">
         <label class="search-box">
@@ -75,7 +76,7 @@
           <input id="searchInput" type="search" placeholder="Buscar productos">
         </label>
         <select id="sortSelect" aria-label="Ordenar productos">
-          <option value="featured">Destacados</option>
+          <option value="featured">Nuestros paquetes</option>
           <option value="priceLow">Menor precio</option>
           <option value="priceHigh">Mayor precio</option>
           
@@ -178,20 +179,31 @@
   </aside>
 
   <template id="productTemplate">
-    <article class="product-card">
+    <article class="product-card product-featured-card">
       <div class="product-media">
         <span class="badge"></span>
-        
+        <span class="product-image-note">Imagen de referencia · colores surtidos</span>
       </div>
       <div class="product-info">
         <p class="category"></p>
         <h3></h3>
+        <p class="product-pack-count"></p>
         <p class="description"></p>
-        <div class="product-meta">
-          <span class="rating"></span>
-          <strong class="price"></strong>
+        <div class="product-highlights" aria-label="Características">
+          <span>Tejido polar</span>
+          <span>Banda detrás de la cabeza</span>
+          <span>Para adultos</span>
         </div>
-        <button class="add-button" type="button">Agregar al carrito</button>
+        <div class="product-view-gallery">
+          <p class="view-gallery-label">Mira el producto en otros colores y en uso</p>
+          <div class="product-thumbnails" role="group" aria-label="Vistas fotográficas del producto"></div>
+          <p class="product-gallery-note">Las fotos muestran el modelo, no la combinación exacta de colores del paquete.</p>
+        </div>
+        <div class="product-meta">
+          <span class="rating">Colores surtidos</span>
+          <div class="price-stack"><span>Precio por paquete</span><strong class="price"></strong></div>
+        </div>
+        <button class="add-button" type="button">Añadir paquete al carrito</button>
       </div>
     </article>
   </template>
