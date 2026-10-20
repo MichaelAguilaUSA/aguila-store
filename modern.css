@@ -400,3 +400,5 @@ select { background: #fff; border: 1px solid #d9e2e8; border-radius: 10px; font-
 .dialog-add{width:100%!important;min-height:52px}
 .dialog-pay-notice{font-size:.81rem;color:#657589;line-height:1.5;margin:0}
 @media(max-width:650px){.product-dialog{max-height:94vh;overflow:auto}.product-dialog-layout{display:block}.product-dialog-media{padding:42px 12px 17px}.product-dialog-media>img{height:210px}.product-dialog-info{padding:23px 20px 27px;gap:13px}.dialog-thumbnail{height:53px;width:58px}.photo-action{bottom:12px;right:10px;padding:8px 10px;font-size:.7rem}}
+
+.gallery-shop-link{display:inline-flex;color:#b42138;font-weight:750;font-size:.82rem;text-decoration:underline;text-underline-offset:3px;padding:4px 0}.gallery-shop-link:hover{color:#8d1a30}.gallery-photo-link{text-decoration:none;color:inherit}.gallery-photo-link:hover .gallery-action{text-decoration:underline}
