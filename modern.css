@@ -340,3 +340,31 @@ select { background: #fff; border: 1px solid #d9e2e8; border-radius: 10px; font-
   .policy-page { margin-block: 20px 44px; padding: 26px 21px; border-radius: 15px; }
   .policy-page .brand { margin-bottom: 28px; }
 }
+
+
+/* Presentación comercial de los dos paquetes */
+.catalog-subtitle { max-width: 58ch; margin: 13px 0 0; color: #667589; font-size: .98rem; line-height: 1.65; }
+.product-featured-card .product-media { position:relative; aspect-ratio:1.25; background:#fbfcfd; }
+.product-featured-card .product-photo { padding: 28px; object-fit:contain; transition: opacity .16s; }
+.product-image-note { position:absolute; bottom:12px; right:12px; z-index:1; color:#607188; background:rgba(255,255,255,.93); border:1px solid #e5eaf0; border-radius:8px; padding:6px 9px; font-size:.69rem; font-weight:650; text-align:right; }
+.product-pack-count { margin: -4px 0 0; color:#b42138; font-size:1.05rem; font-weight:800; }
+.product-highlights { display:flex; flex-wrap:wrap; gap:8px; }
+.product-highlights span { color:#3d4c61; background:#f1f5f7; border-radius:999px; padding:8px 11px; font-weight:600; font-size:.77rem; }
+.product-view-gallery { margin-top:8px; border-top:1px solid #e9edf1; padding-top:14px; }
+.view-gallery-label { margin:0 0 10px; font-weight:740; color:#33465e; font-size:.84rem; }
+.product-thumbnails { display:flex; gap:11px; }
+.product-thumbnail { display:block; width:76px; height:70px; padding:4px; cursor:pointer; border:2px solid #e2e8ee; border-radius:10px; background:#fff; transition:border-color .15s,transform .15s; }
+.product-thumbnail img { width:100%;height:100%;object-fit:contain;display:block; }
+.product-thumbnail:hover { transform:translateY(-1px); border-color:#8d9eb2; }
+.product-thumbnail.is-active { border-color:#bc263a; box-shadow:0 0 0 2px #f6e6e9; }
+.product-gallery-note { margin:10px 0 0; font-size:.75rem; line-height:1.45; color:#788595; }
+.product-featured-card .product-meta { margin-top:13px; padding-top:13px; border-top:1px solid #e9edf1; }
+.price-stack { display:flex; flex-direction:column; gap:3px; align-items:flex-end; }
+.price-stack span { font-size:.74rem; font-weight:600; color:#67788a; }
+.product-featured-card .price { font-size:1.82rem; }
+@media(max-width:660px) {
+ .product-thumbnail { width:70px;height:64px; }
+ .product-featured-card .product-photo { padding:17px; }
+ .product-image-note { font-size:.61rem; }
+ .product-featured-card .product-meta { align-items:end; }
+}
