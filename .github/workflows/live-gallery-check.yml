@@ -36,58 +36,24 @@ jobs:
               const response=await page.goto(uri,{waitUntil:'networkidle',timeout:30000});
               assert.equal(response.status(),200);
               console.log(name+' VERSION PUBLICA: '+response.status());
-              const links=page.locator('.gallery-grid a.gallery-photo-link');
-              assert.equal(await links.count(),4,'Deben existir cuatro enlaces en la galeria');
-              const dragInfo = await page.evaluate(() => [...document.querySelectorAll('.gallery-grid .gallery-photo-link')].map(link => ({
-                anchorDraggable: link.getAttribute('draggable'),
-                imageDraggable: link.querySelector('img')?.getAttribute('draggable'),
-                anchorCSS: getComputedStyle(link).getPropertyValue('-webkit-user-drag'),
-                imageCSS: getComputedStyle(link.querySelector('img')).getPropertyValue('-webkit-user-drag')
-              })));
-              assert.equal(dragInfo.length,4);
-              for (const item of dragInfo) {
-                assert.equal(item.anchorDraggable,'false',name+' enlace no arrastrable');
-                assert.equal(item.imageDraggable,'false',name+' imagen no arrastrable');
-                assert.equal(item.anchorCSS.trim(),'none',name+' CSS de enlace bloquea arrastre');
-                assert.equal(item.imageCSS.trim(),'none',name+' CSS de imagen bloquea arrastre');
-              }
-              console.log(name+' CUATRO FOTOS SIN ARRASTRE NATIVO - OK');
-              for (let i=0;i<4;i++){
-                const link=links.nth(i);
-                const href=await link.getAttribute('href');
-                assert.ok(href.startsWith('#vista-'),'Enlace debe apuntar a ventana interna. Enlace encontrado: '+href);
-                await link.click();
-                const id=href.substring(1);
-                const view=page.locator('#'+id);
-                await view.waitFor({state:'visible',timeout:3000});
-                assert.equal(await view.evaluate(e=>getComputedStyle(e).display),'flex');
-                const close=view.locator('.gallery-lightbox-close');
-                assert.ok(await close.isVisible(),'X debe ser visible');
-                const noFloatingFrame = async () => {
-                  const result = await page.evaluate(() => {
-                    const gallery = document.querySelector('.gallery-grid');
-                    const card = document.querySelector('.gallery-grid .gallery-product-card');
-                    const active = document.querySelector('.gallery-lightbox:target');
-                    return {
-                      galleryVisibility: getComputedStyle(gallery).visibility,
-                      galleryCardTransform: getComputedStyle(card).transform,
-                      lightboxVisible: active && getComputedStyle(active).display === 'flex',
-                      scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior
-                    };
-                  });
-                  assert.equal(result.galleryVisibility,'hidden',name+' marco de galería NO debe flotar');
-                  assert.equal(result.galleryCardTransform,'none',name+' sin transform de miniatura');
-                  assert.equal(result.scrollBehavior,'auto',name+' desplazamiento inmediato');
-                  assert.ok(result.lightboxVisible,name+' foto ampliada visible');
-                };
-                await noFloatingFrame();
-                await page.waitForTimeout(900);
-                await noFloatingFrame();
-                if(i===0) await page.screenshot({path:'artifacts/galeria/'+name+'-ampliada.png'});
+              const links=page.locator('.gallery-grid button.gallery-photo-link');
+              assert.equal(await links.count(),4);
+              for(let i=0;i<4;i++){
+                const button=links.nth(i);
+                assert.equal(await button.getAttribute('type'),'button');
+                await button.click();
+                const dialog=page.locator('#galleryViewer');
+                await dialog.waitFor({state:'visible'});
+                assert.ok(await dialog.evaluate(el=>el.open),'dialog nativo abierto');
+                assert.ok(await dialog.evaluate(el=>el.matches(':modal')),'en top layer modal');
+                const close=dialog.locator('.gallery-viewer-close');
+                assert.ok(await close.isVisible());
+                await page.waitForTimeout(1000);
+                assert.ok(await dialog.evaluate(el=>el.open),'foto estable tras un segundo');
                 await close.click();
-                assert.equal(await view.isVisible(),false,'Al pulsar X debe cerrar la imagen');
-                assert.ok(!page.url().includes('.webp'),'No navegar fuera de la tienda');
-                console.log(name+' FOTO '+(i+1)+' ABRE, X VISIBLE Y CIERRA - OK');
+                assert.equal(await dialog.isVisible(),false);
+                assert.ok(!page.url().includes('.webp'));
+                console.log(name+' FOTO '+(i+1)+' MODAL NATIVO ABRE Y CIERRA - OK');
               }
               await page.screenshot({path:'artifacts/galeria/'+name+'-galeria.png',fullPage:false});
               await page.close();
