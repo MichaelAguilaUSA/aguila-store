@@ -240,7 +240,9 @@ function renderCart() {
   subtotal.textContent = money.format(subtotalValue);
   shipping.textContent = shippingValue === 0 ? "Gratis" : money.format(shippingValue);
   total.textContent = money.format(subtotalValue + shippingValue);
-  checkoutButton.disabled = itemCount === 0;
+  checkoutButton.disabled = true;
+  checkoutButton.textContent = "Compras aún no habilitadas";
+  checkoutMessage.textContent = "Catálogo en preparación: importes y envío sujetos a verificación. No se generan pedidos ni se realizan cobros.";
 }
 
 tabs.forEach((tab) => {
@@ -271,12 +273,7 @@ cartDrawer.addEventListener("click", (event) => {
   }
 });
 
-checkoutButton.addEventListener("click", () => {
-  if (!state.cart.size) return;
-  state.cart.clear();
-  renderCart();
-  checkoutMessage.textContent = "Pedido recibido. Gracias por comprar en Aguila Store 2.0.";
-});
+// Los pagos no se activarán hasta verificar catálogo, envío y Checkout de Stripe.
 
 copyCode.addEventListener("click", async () => {
   try {
