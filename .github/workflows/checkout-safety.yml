@@ -1,0 +1,52 @@
+name: Backend Checkout - pruebas sin cobros
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'netlify/**'
+      - '.github/workflows/checkout-safety.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  no-cobros:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund --ignore-scripts
+      - name: Validar bloqueo y cantidades
+        env:
+          SITE_URL: https://michaelaguilausa.github.io/aguila-store
+          CHECKOUT_SERVICE_ENABLED: 'false'
+        run: |
+          node <<'NODE'
+          const assert=require('node:assert/strict');
+          const {validateCart}=require('./netlify/lib/catalog');
+          const {handler}=require('./netlify/functions/create-checkout-session');
+          (async()=>{
+            assert.equal(validateCart([{id:'orejeras-fleece-2',qty:1}]).ok,true);
+            for(const items of [
+              [],
+              [{id:'orejeras-fleece-2',qty:'1'}],
+              [{id:'orejeras-fleece-2',qty:0}],
+              [{id:'orejeras-fleece-2',qty:1.5}],
+              [{id:'orejeras-fleece-2',qty:21}],
+              [{id:'orejeras-fleece-2',qty:1},{id:'orejeras-fleece-2',qty:1}],
+              [{id:'__proto__',qty:1}],
+              [{id:'orejeras-fleece-2',qty:20},{id:'orejeras-fleece-3',qty:20}]
+            ]) assert.equal(validateCart(items).ok,false,JSON.stringify(items));
+            const base={httpMethod:'POST',headers:{origin:'https://michaelaguilausa.github.io'},body:JSON.stringify({items:[{id:'orejeras-fleece-2',qty:1}]})};
+            let res=await handler(base);
+            assert.equal(res.statusCode,503);
+            assert.equal(res.headers['Access-Control-Allow-Origin'],'https://michaelaguilausa.github.io');
+            res=await handler({...base,headers:{origin:'https://malicious.example'}});
+            assert.equal(res.statusCode,403);
+            res=await handler({...base,httpMethod:'OPTIONS'});
+            assert.equal(res.statusCode,204);
+            console.log('SEGURIDAD OK: sin cobros, CORS correcto, cantidades validas y rechazo de carrito manipulado');
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
