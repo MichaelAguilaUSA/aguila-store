@@ -56,6 +56,18 @@ async function testViewport(name, width, height) {
     check(result.pageWidth <= result.viewportWidth + 2, name + ": sin desplazamiento horizontal " + result.pageWidth + "/" + result.viewportWidth);
     check(errors.length === 0, name + ": Javascript sin errores " + errors.join("; "));
     check(missing.length === 0, name + ": rutas locales válidas " + missing.join("; "));
+    const firstCard = page.locator("#productGrid .product-card").first();
+    const secondCard = page.locator("#productGrid .product-card").nth(1);
+    check((await firstCard.locator(".product-pack-count").innerText()).includes("2 unidades"), name + ": ficha de 2 unidades");
+    check((await secondCard.locator(".product-pack-count").innerText()).includes("3 unidades"), name + ": ficha de 3 unidades");
+    check((await firstCard.locator(".price").innerText()) === "$12.99", name + ": precio 2 unidades");
+    check((await secondCard.locator(".price").innerText()) === "$16.99", name + ": precio 3 unidades");
+    check(await firstCard.locator(".product-thumbnail").count() === 3, name + ": 3 vistas en ficha");
+    await firstCard.locator(".product-thumbnail").nth(2).click();
+    check((await firstCard.locator(".product-photo").getAttribute("src")).includes("orejeras-camionero"), name + ": galería interactiva");
+    check(await firstCard.locator(".product-thumbnail").nth(2).getAttribute("aria-pressed") === "true", name + ": miniatura seleccionada");
+    await firstCard.locator(".product-thumbnail").first().click();
+    check((await firstCard.locator(".product-photo").getAttribute("src")).includes("orejeras-negras"), name + ": foto principal recuperada");
     await page.screenshot({path: SHOTS + "/" + name + "-portada-completa.png", fullPage: true});
     await page.locator("#productGrid .add-button").first().click();
     check(await page.locator("#cartDrawer").getAttribute("aria-hidden") === "false", name + ": carrito abre");
