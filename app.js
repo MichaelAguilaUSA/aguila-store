@@ -1,99 +1,27 @@
 const products = [
   {
-    id: "eagle-audio-deck",
-    name: "Eagle Audio Deck",
-    category: "Electronica",
-    description: "Sistema de sonido compacto con graves potentes y conexion Bluetooth.",
-    price: 189,
-    rating: 4.9,
-    badge: "Premium",
-    type: "electronics",
-    shape: "linear-gradient(145deg, #ffffff, #0b3b82 72%)",
-    art: "linear-gradient(145deg, #ffffff 0%, #d8e8ff 44%, #0b3b82 100%)"
+    id: "orejeras-fleece-2",
+    name: "FLEECE EAR MUFFS — Paquete de 2",
+    category: "Invierno",
+    description: "Paquete de 2 orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
+    price: 12.99,
+    stripePriceId: "price_1USUSaMHMUnGAXSu7LiayJjC",
+    image: "images/orejeras-negras.webp",
+    imageAlt: "Orejeras negras de tejido polar sobre fondo blanco, fotografía de presentación",
+    badge: "Paquete de 2",
+    type: "winter"
   },
   {
-    id: "smart-home-command",
-    name: "Smart Home Command",
-    category: "Electronica",
-    description: "Centro inteligente para controlar luces, camaras y accesorios del hogar.",
-    price: 129,
-    rating: 4.7,
-    badge: "Nuevo",
-    type: "electronics",
-    shape: "linear-gradient(145deg, #ffffff, #df1f2d 72%)",
-    art: "linear-gradient(145deg, #ffffff 0%, #ffe1e4 44%, #df1f2d 100%)"
-  },
-  {
-    id: "dash-cam-elite",
-    name: "Dash Cam Elite",
-    category: "Automovil",
-    description: "Camara para auto con vision nocturna, GPS y grabacion continua.",
-    price: 96,
-    rating: 4.8,
-    badge: "Auto",
-    type: "auto",
-    shape: "#0b3b82",
-    art: "linear-gradient(145deg, #ffffff 0%, #d8e8ff 42%, #0b3b82 100%)"
-  },
-  {
-    id: "garage-detail-kit",
-    name: "Garage Detail Kit",
-    category: "Automovil",
-    description: "Kit de limpieza automotriz con espuma, microfibra y acabado brillante.",
-    price: 58,
-    rating: 4.6,
-    badge: "Best",
-    type: "auto",
-    shape: "#df1f2d",
-    art: "linear-gradient(145deg, #ffffff 0%, #ffe1e4 46%, #df1f2d 100%)"
-  },
-  {
-    id: "impact-driver-pro",
-    name: "Impact Driver Pro",
-    category: "Herramientas",
-    description: "Atornillador de impacto con torque alto y bateria de larga duracion.",
-    price: 149,
-    rating: 4.8,
-    badge: "Pro",
-    type: "tool",
-    shape: "#0b3b82",
-    art: "linear-gradient(145deg, #ffffff 0%, #d8e8ff 42%, #0b3b82 100%)"
-  },
-  {
-    id: "steel-toolbox",
-    name: "Steel Garage Toolbox",
-    category: "Herramientas",
-    description: "Caja metalica premium con organizadores para taller y garage.",
-    price: 74,
-    rating: 4.5,
-    badge: "Garage",
-    type: "tool",
-    shape: "#df1f2d",
-    art: "linear-gradient(145deg, #ffffff 0%, #ffe1e4 45%, #a91520 100%)"
-  },
-  {
-    id: "weekend-power-bundle",
-    name: "Weekend Power Bundle",
-    category: "Ofertas",
-    description: "Paquete de ahorro con accesorios de tecnologia, auto y herramientas.",
-    price: 99,
-    rating: 4.4,
-    badge: "Oferta",
-    type: "deal",
-    shape: "#df1f2d",
-    art: "linear-gradient(145deg, #0b3b82 0%, #ffffff 48%, #df1f2d 100%)"
-  },
-  {
-    id: "american-saver-pack",
-    name: "American Saver Pack",
-    category: "Ofertas",
-    description: "Seleccion de alta rotacion con precio reducido por tiempo limitado.",
-    price: 45,
-    rating: 4.6,
-    badge: "Hot",
-    type: "deal",
-    shape: "#0b3b82",
-    art: "linear-gradient(145deg, #df1f2d 0%, #ffffff 45%, #0b3b82 100%)"
+    id: "orejeras-fleece-3",
+    name: "FLEECE EAR MUFFS — Paquete de 3",
+    category: "Invierno",
+    description: "Paquete de 3 orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
+    price: 16.99,
+    stripePriceId: "price_1USUScMHMUnGAXSuAZgDYnu3",
+    image: "images/orejeras-negras.webp",
+    imageAlt: "Orejeras negras de tejido polar sobre fondo blanco, fotografía de presentación",
+    badge: "Paquete de 3",
+    type: "winter"
   }
 ];
 
@@ -155,13 +83,13 @@ function renderProducts() {
   visibleProducts.forEach((product) => {
     const card = productTemplate.content.firstElementChild.cloneNode(true);
     card.dataset.type = product.type;
-    card.style.setProperty("--art-bg", product.art);
-    card.style.setProperty("--shape", product.shape);
+    card.style.setProperty("--art-bg", "#ffffff");
+    card.querySelector(".product-media").insertAdjacentHTML("beforeend", `<img class="product-photo" src="${product.image}" alt="${product.imageAlt}" loading="lazy">`);
     card.querySelector(".badge").textContent = product.badge;
     card.querySelector(".category").textContent = product.category;
     card.querySelector("h3").textContent = product.name;
     card.querySelector(".description").textContent = product.description;
-    card.querySelector(".rating").textContent = `${product.rating.toFixed(1)} ★`;
+    card.querySelector(".rating").textContent = "Colores surtidos";
     card.querySelector(".price").textContent = money.format(product.price);
     card.querySelector(".add-button").addEventListener("click", () => addToCart(product.id));
     productGrid.append(card);
@@ -213,7 +141,7 @@ function renderCart() {
     const line = document.createElement("article");
     line.className = "cart-line";
     line.innerHTML = `
-      <div class="mini-art" style="--art-bg: ${product.art}"></div>
+      <img class="mini-art" src="${product.image}" alt="" loading="lazy">
       <div>
         <h3>${product.name}</h3>
         <p>${money.format(product.price)} x ${quantity}</p>
@@ -235,14 +163,14 @@ function renderCart() {
     cartItems.innerHTML = '<p class="empty-cart">Tu carrito esta vacio. Agrega productos del catalogo para comenzar.</p>';
   }
 
-  const shippingValue = subtotalValue > 0 && subtotalValue < 150 ? 12 : 0;
+  const shippingValue = 0;
   cartCount.textContent = itemCount;
   subtotal.textContent = money.format(subtotalValue);
-  shipping.textContent = shippingValue === 0 ? "Gratis" : money.format(shippingValue);
-  total.textContent = money.format(subtotalValue + shippingValue);
+  shipping.textContent = "Por calcular";
+  total.textContent = `${money.format(subtotalValue)} + envío por calcular`;
   checkoutButton.disabled = true;
   checkoutButton.textContent = "Compras aún no habilitadas";
-  checkoutMessage.textContent = "Catálogo en preparación: importes y envío sujetos a verificación. No se generan pedidos ni se realizan cobros.";
+  checkoutMessage.textContent = "Compra no habilitada: falta verificar el envío e integrar Stripe Checkout. No se generan pedidos ni se realizan cobros.";
 }
 
 tabs.forEach((tab) => {
@@ -274,19 +202,6 @@ cartDrawer.addEventListener("click", (event) => {
 });
 
 // Los pagos no se activarán hasta verificar catálogo, envío y Checkout de Stripe.
-
-copyCode.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText("AGUILA20");
-    copyCode.textContent = "Codigo copiado";
-  } catch {
-    copyCode.textContent = "AGUILA20";
-  }
-
-  window.setTimeout(() => {
-    copyCode.textContent = "Copiar codigo";
-  }, 1800);
-});
 
 renderProducts();
 renderCart();
