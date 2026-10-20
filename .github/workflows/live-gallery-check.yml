@@ -24,6 +24,7 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Probar la galería REAL de GitHub Pages
         run: |
+          mkdir -p artifacts/galeria
           node <<'NODE'
           const {chromium}=require('playwright');
           const assert=require('node:assert/strict');
@@ -48,14 +49,43 @@ jobs:
                 assert.equal(await view.evaluate(e=>getComputedStyle(e).display),'flex');
                 const close=view.locator('.gallery-lightbox-close');
                 assert.ok(await close.isVisible(),'X debe ser visible');
+                const noFloatingFrame = async () => {
+                  const result = await page.evaluate(() => {
+                    const gallery = document.querySelector('.gallery-grid');
+                    const card = document.querySelector('.gallery-grid .gallery-product-card');
+                    const active = document.querySelector('.gallery-lightbox:target');
+                    return {
+                      galleryVisibility: getComputedStyle(gallery).visibility,
+                      galleryCardTransform: getComputedStyle(card).transform,
+                      lightboxVisible: active && getComputedStyle(active).display === 'flex',
+                      scrollBehavior: getComputedStyle(document.documentElement).scrollBehavior
+                    };
+                  });
+                  assert.equal(result.galleryVisibility,'hidden',name+' marco de galería NO debe flotar');
+                  assert.equal(result.galleryCardTransform,'none',name+' sin transform de miniatura');
+                  assert.equal(result.scrollBehavior,'auto',name+' desplazamiento inmediato');
+                  assert.ok(result.lightboxVisible,name+' foto ampliada visible');
+                };
+                await noFloatingFrame();
+                await page.waitForTimeout(900);
+                await noFloatingFrame();
+                if(i===0) await page.screenshot({path:'artifacts/galeria/'+name+'-ampliada.png'});
                 await close.click();
                 assert.equal(await view.isVisible(),false,'Al pulsar X debe cerrar la imagen');
                 assert.ok(!page.url().includes('.webp'),'No navegar fuera de la tienda');
                 console.log(name+' FOTO '+(i+1)+' ABRE, X VISIBLE Y CIERRA - OK');
               }
+              await page.screenshot({path:'artifacts/galeria/'+name+'-galeria.png',fullPage:false});
               await page.close();
             }
             await b.close();
             console.log('RESULTADO: GALERIA PUBLICA OPERATIVA EN ESCRITORIO Y MOVIL');
           })().catch(e=>{console.error('FALLO EN LA GALERIA REAL: ',e);process.exit(1)});
           NODE
+      - name: Capturas de galería en computadora y teléfono
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aguila-store-galeria-comprobada
+          path: artifacts/galeria/*.png
+          if-no-files-found: warn
