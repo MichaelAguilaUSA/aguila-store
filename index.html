@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aguila Store 2.0</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261020-4">
+  <link rel="stylesheet" href="modern.css?v=20261020-1">
 </head>
 <body>
   <header class="site-header">
@@ -13,15 +14,15 @@
       <span>Aguila Store</span>
     </a>
 
-    <nav class="desktop-nav" aria-label="Navegacion principal">
-      <a href="#catalogo">Catalogo</a>
-      <a href="#ofertas">Ofertas</a>
-      <a href="#por-que">Por que comprar</a>
-      <a href="#aliados">Aliados</a>
+    <nav class="desktop-nav" aria-label="Navegación principal">
+      <a href="#catalogo">Productos</a>
+      <a href="#colores">Galería</a>
+      <a href="#por-que">Nuestra tienda</a>
+      <a href="#aliados">Información</a>
     </nav>
 
     <div class="header-actions">
-      <a class="mini-link" href="https://www.amazon.com/" target="_blank" rel="noreferrer">Amazon</a>
+      <a class="mini-link" href="#catalogo">Ver productos</a>
       <button class="cart-button" id="openCart" type="button" aria-label="Abrir carrito">
         <span class="cart-icon" aria-hidden="true"></span>
         <span class="cart-count" id="cartCount">0</span>
@@ -32,51 +33,35 @@
   <main>
     <section class="hero" id="inicio">
       <div class="hero-content">
-        <p class="eyebrow">Aguila Store 2.0</p>
-        <h1>Compra con fuerza americana.</h1>
-        <p class="hero-text">Presentaciones de orejeras de tejido polar para adulto, con banda detrás de la cabeza y colores surtidos sujetos a disponibilidad.</p>
+        <p class="eyebrow">AGUILA STORE · COLECCIÓN INVIERNO</p>
+        <h1>Abrígate con <span>estilo.</span></h1>
+        <p class="hero-text">Orejeras de tejido polar para adultos. Cómodas, prácticas y diseñadas para llevar la banda detrás de la cabeza. Disponibles en paquetes de 2 y 3 unidades, con colores surtidos sujetos a disponibilidad.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#catalogo">Explorar catálogo</a>
-          <a class="button ghost" href="#por-que">Por que elegirnos</a>
+          <a class="button primary" href="#catalogo">Explorar productos →</a>
+          <a class="button ghost" href="#colores">Ver fotografías</a>
         </div>
-        <div class="hero-proof" aria-label="Resumen de beneficios">
-          <span>Curado premium</span>
-          <span>Pagos en preparación</span>
-          <span>Productos de invierno</span>
+        <div class="hero-proof" aria-label="Información de la colección">
+          <span>Desde $12.99</span>
+          <span>Paquetes de 2 y 3</span>
         </div>
       </div>
-
-      <div class="hero-panel" aria-label="Resumen de tienda">
-        <div class="hero-product main-device">
-          <span class="hero-tag">Protección para los días fríos</span>
-          <strong>Orejeras fleece para adultos</strong>
-        </div>
+      <div class="hero-panel" aria-label="Presentación de las orejeras">
+        <figure class="hero-visual">
+          <img src="images/orejeras-negras.webp" alt="Orejeras negras de tejido polar, modelo con banda detrás de la cabeza" fetchpriority="high" decoding="async">
+          <span class="hero-sticker">FLEECE EAR MUFFS</span>
+          <figcaption class="hero-note">Comodidad para días fríos</figcaption>
+        </figure>
         <div class="hero-metrics">
-          <div>
-            <strong>2</strong>
-            <span>Presentaciones</span>
-          </div>
-          <div>
-            <strong>En revisión</strong>
-            <span>Condiciones de envío</span>
-          </div>
+          <div><strong>2 unidades</strong><span>Paquete desde $12.99</span></div>
+          <div><strong>3 unidades</strong><span>Paquete desde $16.99</span></div>
         </div>
       </div>
     </section>
 
-    <section class="trust-bar" aria-label="Beneficios">
-      <div>
-        <strong>Premium USA</strong>
-        <span>Estilo rojo, blanco y azul</span>
-      </div>
-      <div>
-        <strong>Envío fijo $3.99</strong>
-        <span>A todo EE. UU., visible antes de pagar</span>
-      </div>
-      <div>
-        <strong>Aliados</strong>
-        <span>Amazon, Facebook y TikTok Shop</span>
-      </div>
+    <section class="trust-bar" aria-label="Información de compra">
+      <div><strong>Fotografías reales</strong><span>Conoce los productos antes de elegir</span></div>
+      <div><strong>Colores surtidos</strong><span>Sujetos a disponibilidad al preparar el pedido</span></div>
+      <div><strong>Compra en preparación</strong><span>El pago aún no está habilitado</span></div>
     </section>
 
     <section class="section-heading" id="catalogo">
@@ -108,10 +93,10 @@
     <section class="section-heading" id="colores">
       <div>
         <p class="eyebrow">Galería</p>
-        <h2>Colores surtidos, puestas detrás de la cabeza</h2>
+        <h2>Conoce los colores y cómo se usan</h2>
       </div>
     </section>
-    <section class="product-grid" aria-label="Galería de colores de orejeras">
+    <section class="product-grid gallery-grid" aria-label="Galería de colores de orejeras">
       <article class="product-card"><div class="product-media"><img class="product-photo" src="images/orejeras-negras.webp" alt="Orejeras fleece negras" loading="lazy" decoding="async"></div><div class="product-info"><h3>Negro</h3></div></article>
       <article class="product-card"><div class="product-media"><img class="product-photo" src="images/orejeras-grises.webp" alt="Orejeras fleece grises" loading="lazy" decoding="async"></div><div class="product-info"><h3>Gris</h3></div></article>
       <article class="product-card"><div class="product-media"><img class="product-photo" src="images/orejeras-vino.webp" alt="Orejeras fleece rojo vino" loading="lazy" decoding="async"></div><div class="product-info"><h3>Rojo vino</h3></div></article>
@@ -121,56 +106,42 @@
     <section class="offers-band" id="ofertas">
       <div>
         <p class="eyebrow">Aviso importante</p>
-        <h2>Catálogo en preparación</h2>
-        <p>La compra y el cálculo definitivo del envío estarán disponibles cuando termine la integración segura con Stripe.</p>
+        <h2>Estamos preparando la compra segura</h2>
+        <p>Puedes explorar nuestros productos y añadirlos al carrito. El pago todavía no está disponible: habilitaremos los pedidos cuando el envío y Stripe Checkout hayan superado las pruebas.</p>
       </div>
     </section>
 
-    <section class="why-buy" id="por-que" aria-label="Por que comprar en Aguila Store">
+    <section class="why-buy" id="por-que" aria-label="Por qué comprar en AGUILA STORE">
       <div class="section-heading compact">
         <div>
-          <p class="eyebrow">Por que comprar en Aguila Store</p>
-          <h2>Una tienda pensada para vender con confianza</h2>
+          <p class="eyebrow">NUESTRA TIENDA</p>
+          <h2>Una experiencia simple, clara y confiable</h2>
         </div>
       </div>
       <div class="why-grid">
-        <article>
-          <strong>Seleccion fuerte</strong>
-          <p>Dos presentaciones de orejeras fleece, con colores surtidos sujetos a disponibilidad.</p>
-        </article>
-        <article>
-          <strong>Experiencia rapida</strong>
-          <p>Busqueda, filtros, ordenamiento y carrito sin pasos innecesarios para que el cliente llegue al pedido.</p>
-        </article>
-        <article>
-          <strong>Estilo premium</strong>
-          <p>Diseño oscuro con acentos rojo, blanco y azul para proyectar marca moderna y americana.</p>
-        </article>
+        <article><strong>Productos que puedes ver</strong><p>Fotografías del producto y descripciones con información sobre unidades, uso y colores disponibles.</p></article>
+        <article><strong>Precios claros</strong><p>Elige entre dos presentaciones. Los costos de envío se confirmarán antes de habilitar el pago.</p></article>
+        <article><strong>Compra sin complicaciones</strong><p>Busca, compara y organiza tu carrito mientras finalizamos la conexión segura del checkout.</p></article>
       </div>
     </section>
   </main>
 
   <footer class="site-footer" id="aliados">
     <div>
-      <a class="brand footer-brand" href="#inicio" aria-label="Aguila Store inicio">
+      <a class="brand footer-brand" href="#inicio" aria-label="AGUILA STORE inicio">
         <img src="aguila-mark.svg" alt="" class="brand-mark">
-        <span>Aguila Store</span>
+        <span>AGUILA STORE</span>
       </a>
-      <p>Tienda online de AGUILA STORE. Compras aún no habilitadas.</p>
-      <div class="ally-grid">
-        <a href="envio.html">Política de envío</a>
-        <a href="devoluciones.html">Política de devolución</a>
-        <a href="privacidad.html">Privacidad</a>
-        <a href="condiciones.html">Condiciones de compra</a>
-        <a href="contacto.html">Contacto</a>
-      </div>
+      <p>Selección de productos para tu día a día. La tienda está en preparación y las compras aún no están habilitadas.</p>
     </div>
     <div>
-      <p class="eyebrow">Aliados y canales</p>
+      <p class="eyebrow">INFORMACIÓN Y AYUDA</p>
       <div class="ally-grid">
-        <a href="https://www.amazon.com/" target="_blank" rel="noreferrer">Amazon</a>
-        <a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
-        <a href="https://www.tiktok.com/shop" target="_blank" rel="noreferrer">TikTok Shop</a>
+        <a href="envio.html">Envíos</a>
+        <a href="devoluciones.html">Devoluciones</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="condiciones.html">Condiciones</a>
+        <a href="contacto.html">Contacto</a>
       </div>
     </div>
   </footer>
