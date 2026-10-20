@@ -61,13 +61,16 @@ jobs:
               assert.ok(await cart.evaluate(e=>e.classList.contains('open')));
               assert.equal(await page.locator('#cartCount').innerText(),'1');
               assert.equal(await page.locator('#subtotal').innerText(),'$12.99');
-              assert.equal(await page.locator('#shipping').innerText(),'A confirmar');
-              assert.equal(await page.locator('#total').innerText(),'Pendiente');
+              assert.equal(await page.locator('#shipping').innerText(),'$3.99');
+              assert.equal(await page.locator('#taxAmount').innerText(),'Por calcular');
+              assert.equal(await page.locator('#total').innerText(),'$16.98');
               assert.equal(await page.locator('#checkoutButton').isDisabled(),true);
               await page.locator('.quantity button').last().click();
               assert.equal(await page.locator('#subtotal').innerText(),'$25.98');
+              assert.equal(await page.locator('#total').innerText(),'$29.97');
               await page.locator('.quantity button').first().click();
               assert.equal(await page.locator('#subtotal').innerText(),'$12.99');
+              assert.equal(await page.locator('#total').innerText(),'$16.98');
               await page.locator('#closeCart').click();
               await page.reload({waitUntil:'networkidle'});
               assert.equal(await page.locator('#cartCount').innerText(),'1','persiste carrito');
