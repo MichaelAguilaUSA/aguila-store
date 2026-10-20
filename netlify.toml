@@ -1,0 +1,9 @@
+# AGUILA STORE — servicio seguro de pedidos (Netlify Functions)
+# La tienda pública sigue en GitHub Pages; este servicio solo expone
+# las funciones de pago. Desplegar ESTA carpeta como sitio de Netlify
+# (sin publicar página pública) y configurar las variables de entorno.
+[build]
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"

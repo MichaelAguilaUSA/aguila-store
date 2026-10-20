@@ -3,7 +3,7 @@ const products = [
     id: "orejeras-fleece-2",
     name: "FLEECE EAR MUFFS — Paquete de 2",
     category: "Invierno",
-    description: "Paquete de 2 orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
+    description: "Paquete de 2 unidades completas de orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
     price: 12.99,
     stripePriceId: "price_1USUSaMHMUnGAXSu7LiayJjC",
     image: "images/orejeras-negras.webp",
@@ -15,11 +15,11 @@ const products = [
     id: "orejeras-fleece-3",
     name: "FLEECE EAR MUFFS — Paquete de 3",
     category: "Invierno",
-    description: "Paquete de 3 orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
+    description: "Paquete de 3 unidades completas de orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
     price: 16.99,
     stripePriceId: "price_1USUScMHMUnGAXSuAZgDYnu3",
-    image: "images/orejeras-negras.webp",
-    imageAlt: "Orejeras negras de tejido polar sobre fondo blanco, fotografía de presentación",
+    image: "images/orejeras-grises.webp",
+    imageAlt: "Orejeras grises de tejido polar sobre fondo blanco, fotografía de presentación",
     badge: "Paquete de 3",
     type: "winter"
   }
@@ -48,6 +48,33 @@ const total = document.querySelector("#total");
 const checkoutButton = document.querySelector("#checkoutButton");
 const checkoutMessage = document.querySelector("#checkoutMessage");
 const copyCode = document.querySelector("#copyCode");
+
+// Pago seguro: el carrito pide la sesión al servicio de pedidos y redirige
+// a Stripe Checkout. La clave secreta NUNCA está en este archivo.
+// CHECKOUT_ENABLED se activa solo en las pruebas del PASO 5 y tras el
+// "LANZAR" de Michael. CHECKOUT_API_URL se rellena al desplegar el servicio.
+const CHECKOUT_ENABLED = false;
+const CHECKOUT_API_URL = "";
+
+async function startCheckout() {
+  const items = [...state.cart.entries()].map(([id, qty]) => ({ id, qty }));
+  if (!items.length) return;
+  checkoutButton.disabled = true;
+  checkoutMessage.textContent = "Conectando con el pago seguro...";
+  try {
+    const res = await fetch(`${CHECKOUT_API_URL}/create-checkout-session`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || "Sin respuesta del servicio de pago.");
+    window.location.href = data.url;
+  } catch (err) {
+    checkoutMessage.textContent = `No se pudo iniciar el pago: ${err.message}`;
+    checkoutButton.disabled = false;
+  }
+}
 
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -84,7 +111,7 @@ function renderProducts() {
     const card = productTemplate.content.firstElementChild.cloneNode(true);
     card.dataset.type = product.type;
     card.style.setProperty("--art-bg", "#ffffff");
-    card.querySelector(".product-media").insertAdjacentHTML("beforeend", `<img class="product-photo" src="${product.image}?v=20261020-2" alt="${product.imageAlt}" loading="eager" decoding="async">`);
+    card.querySelector(".product-media").insertAdjacentHTML("beforeend", `<img class="product-photo" src="${product.image}?v=20261020-3" alt="${product.imageAlt}" loading="eager" decoding="async">`);
     card.querySelector(".badge").textContent = product.badge;
     card.querySelector(".category").textContent = product.category;
     card.querySelector("h3").textContent = product.name;
@@ -168,9 +195,14 @@ function renderCart() {
   subtotal.textContent = money.format(subtotalValue);
   shipping.textContent = "Por calcular";
   total.textContent = `${money.format(subtotalValue)} + envío por calcular`;
-  checkoutButton.disabled = true;
-  checkoutButton.textContent = "Compras aún no habilitadas";
-  checkoutMessage.textContent = "Compra no habilitada: falta verificar el envío e integrar Stripe Checkout. No se generan pedidos ni se realizan cobros.";
+  if (CHECKOUT_ENABLED) {
+    checkoutButton.disabled = !itemCount;
+    checkoutButton.textContent = "Finalizar pedido";
+  } else {
+    checkoutButton.disabled = true;
+    checkoutButton.textContent = "Compras aún no habilitadas";
+    checkoutMessage.textContent = "Compra no habilitada: falta verificar el envío e integrar Stripe Checkout. No se generan pedidos ni se realizan cobros.";
+  }
 }
 
 tabs.forEach((tab) => {
@@ -192,6 +224,7 @@ sortSelect.addEventListener("change", (event) => {
   renderProducts();
 });
 
+checkoutButton.addEventListener("click", () => { if (CHECKOUT_ENABLED) startCheckout(); });
 openCart.addEventListener("click", openCartPanel);
 closeCart.addEventListener("click", closeCartPanel);
 
