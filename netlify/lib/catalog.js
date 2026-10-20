@@ -5,12 +5,14 @@
 const CATALOG = {
   "orejeras-fleece-2": {
     name: "FLEECE EAR MUFFS — Paquete de 2",
-    stripePriceId: "price_1USUSaMHMUnGAXSu7LiayJjC",
+    // En modo TEST se usan los precios de prueba definidos por entorno
+    // (STRIPE_PRICE_PACK2); el Price ID real queda como valor por defecto.
+    stripePriceId: process.env.STRIPE_PRICE_PACK2 || "price_1USUSaMHMUnGAXSu7LiayJjC",
     unitsPerPack: 2
   },
   "orejeras-fleece-3": {
     name: "FLEECE EAR MUFFS — Paquete de 3",
-    stripePriceId: "price_1USUScMHMUnGAXSuAZgDYnu3",
+    stripePriceId: process.env.STRIPE_PRICE_PACK3 || "price_1USUScMHMUnGAXSuAZgDYnu3",
     unitsPerPack: 3
   }
 };
