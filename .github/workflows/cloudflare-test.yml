@@ -1,0 +1,19 @@
+name: Cloudflare Workers - pruebas sin cobros
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cloudflare/**"
+      - ".github/workflows/cloudflare-test.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node cloudflare/test.mjs
