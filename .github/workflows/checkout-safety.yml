@@ -105,3 +105,66 @@ jobs:
             console.log('WEBHOOK Y CONFIRMACION OK: firma TEST, LIVE rechazado, sin PII y sin pedidos falsos');
           })().catch(e=>{console.error(e);process.exit(1)});
           NODE
+      - name: Verificar creación simulada de sesión Stripe (sin llamadas externas)
+        run: |
+          node <<'NODE'
+          const assert=require('node:assert/strict');
+          const Module=require('node:module');
+          process.env.SITE_URL='https://michaelaguilausa.github.io/aguila-store';
+          process.env.CHECKOUT_MODE='test';
+          process.env.CHECKOUT_SERVICE_ENABLED='true';
+          process.env.STRIPE_SECRET_KEY='sk_test_simulacion_local';
+          process.env.STRIPE_PRICE_PACK2='price_test_pack2';
+          process.env.STRIPE_PRICE_PACK3='price_test_pack3';
+          process.env.SHIPPING_RATE_ID='shr_test_local';
+          process.env.INVENTARIO_UNIDADES='100';
+          let called=0, parameters=null;
+          const original=Module._load;
+          function FakeStripe(key) {
+            assert.ok(key.startsWith('sk_test_'));
+            this.checkout={sessions:{create:async p=>{
+              called++;
+              parameters=p;
+              return {url:'https://checkout.stripe.com/test/simulada'};
+            }}};
+          }
+          Module._load=function(name,parent,isMain){
+            if(name==='stripe' && parent?.filename?.endsWith('/create-checkout-session.js')){
+              return FakeStripe;
+            }
+            return original.apply(this,arguments);
+          };
+          const {handler}=require('./netlify/functions/create-checkout-session');
+          Module._load=original;
+          const event=items=>({httpMethod:'POST',
+            headers:{origin:'https://michaelaguilausa.github.io'},
+            body:JSON.stringify({items})});
+          (async()=>{
+            let res=await handler(event([
+              {id:'orejeras-fleece-2',qty:1},
+              {id:'orejeras-fleece-3',qty:2}
+            ]));
+            assert.equal(res.statusCode,200);
+            assert.equal(JSON.parse(res.body).url,'https://checkout.stripe.com/test/simulada');
+            assert.deepEqual(parameters.line_items,[
+              {price:'price_test_pack2',quantity:1},
+              {price:'price_test_pack3',quantity:2}
+            ]);
+            assert.deepEqual(parameters.shipping_options,[{shipping_rate:'shr_test_local'}]);
+            assert.equal(parameters.mode,'payment');
+            assert.equal(parameters.success_url,
+              'https://michaelaguilausa.github.io/aguila-store/gracias.html?session_id={CHECKOUT_SESSION_ID}');
+            assert.equal(parameters.cancel_url,
+              'https://michaelaguilausa.github.io/aguila-store/index.html#catalogo');
+            assert.equal(parameters.metadata.total_units,'8');
+            assert.equal(called,1);
+            res=await handler(event([{id:'orejeras-fleece-2',qty:'999'}]));
+            assert.equal(res.statusCode,400);
+            assert.equal(called,1,'no se invoca Stripe para carritos manipulados');
+            delete process.env.SHIPPING_RATE_ID;
+            res=await handler(event([{id:'orejeras-fleece-2',qty:1}]));
+            assert.equal(res.statusCode,503,'sin tarifa no hay sesión');
+            assert.equal(called,1);
+            console.log('CHECKOUT SIMULADO OK: precios TEST, envío requerido, rutas correctas, sin cargo real');
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
