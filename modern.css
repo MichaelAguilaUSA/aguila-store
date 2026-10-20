@@ -285,3 +285,58 @@ select { background: #fff; border: 1px solid #d9e2e8; border-radius: 10px; font-
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* POLICIES PREMIUM */
+/* Shared light presentation across shipping, returns, privacy and contact */
+.policy-page {
+  width: min(860px, calc(100% - 36px));
+  max-width: 860px;
+  margin: clamp(24px, 4vw, 64px) auto 85px;
+  padding: clamp(26px, 5vw, 58px);
+  border: 1px solid #e4ebef;
+  border-radius: 21px;
+  background: #fff;
+  box-shadow: 0 14px 50px rgba(24,39,60,.06);
+}
+.policy-page .brand { margin-bottom: 34px; }
+.policy-page .eyebrow { margin: 10px 0 14px; }
+.policy-page h1 {
+  max-width: none;
+  margin: 0 0 22px;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  line-height: 1.16;
+  letter-spacing: -.045em;
+  text-transform: none;
+}
+.policy-page h2 {
+  margin: 32px 0 11px;
+  color: var(--navy);
+  font-size: 1.2rem;
+  letter-spacing: -.015em;
+}
+.policy-page p,
+.policy-page li { color: #586778; line-height: 1.75; font-weight: 450; }
+.policy-page a:not(.brand) { color: #a92134; text-underline-offset: 3px; }
+.policy-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 38px;
+  padding-top: 26px;
+  border-top: 1px solid #e7ecef;
+}
+.policy-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 9px 13px;
+  border-radius: 9px;
+  background: #f2f5f7;
+  text-decoration: none;
+  font-size: .87rem;
+}
+.policy-links a:hover { background: #e7edf2; }
+@media (max-width: 600px) {
+  .policy-page { margin-block: 20px 44px; padding: 26px 21px; border-radius: 15px; }
+  .policy-page .brand { margin-bottom: 28px; }
+}
