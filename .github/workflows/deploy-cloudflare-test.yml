@@ -1,0 +1,60 @@
+name: Publicar Cloudflare TEST — pagos desactivados
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: aguila-store-cloudflare-test
+  cancel-in-progress: false
+
+jobs:
+  publicar-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar pruebas sin pagos
+        run: node cloudflare/test.mjs
+      - name: Comprobar autorización de Cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Faltan secretos CLOUDFLARE_API_TOKEN y/o CLOUDFLARE_ACCOUNT_ID en GitHub Actions."
+            exit 1
+          fi
+          grep -q 'CHECKOUT_SERVICE_ENABLED = "false"' cloudflare/wrangler.toml
+          grep -q 'CHECKOUT_MODE = "test"' cloudflare/wrangler.toml
+          grep -q 'name = "aguila-store-checkout-test"' cloudflare/wrangler.toml
+      - name: Publicar Worker de PRUEBA solamente
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: cloudflare
+          command: deploy
+      - name: Comprobar servicio público apagado
+        env:
+          DEPLOYED_URL: ${{ steps.deploy.outputs.deployment-url }}
+        run: |
+          node <<'NODE'
+          const assert=require('node:assert/strict');
+          (async()=>{
+            const base=process.env.DEPLOYED_URL;
+            assert.ok(base && base.startsWith('https://'),'Worker debe tener URL HTTPS');
+            const response=await fetch(new URL('/health',base));
+            assert.equal(response.status,200);
+            const j=await response.json();
+            assert.equal(j.mode,'test-only');
+            assert.equal(j.configured,false,'Checkout debe seguir desactivado');
+            assert.equal(j.webPaymentsEnabled,false);
+            console.log('CLOUDFLARE TEST PUBLICADO; COBROS DESACTIVADOS. URL:',base);
+          })().catch(e=>{console.error(e.message);process.exit(1)});
+          NODE
