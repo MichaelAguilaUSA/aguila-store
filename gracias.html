@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gracias por tu compra | Aguila Store</title>
+  <title>Estado del pedido | Aguila Store</title>
   <link rel="stylesheet" href="styles.css">
   <style>
     .policy-page { width: min(860px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 70px; }
@@ -19,10 +19,18 @@
       <span>Aguila Store</span>
     </a>
     <p class="eyebrow">Aguila Store · Fort Myers, Florida</p>
-    <h1>Gracias por tu compra</h1>
-    <p>Tu pago fue confirmado por Stripe y tu pedido quedó registrado para despacho. Te enviaremos el número de seguimiento cuando el paquete salga desde Fort Myers, Florida.</p>
+    <h1>Estado del pedido</h1>
+    <p id="orderStatus" role="status">Estamos revisando el resultado de tu compra. Esta página no confirma por sí sola que el pago se haya completado.</p>
+    <p>Un pedido solo se considera confirmado cuando Stripe notifica el pago al servicio de pedidos y ese servicio registra la operación. No despachamos mercancía basándonos únicamente en esta pantalla.</p>
     <p>Si tienes cualquier duda, escríbenos por WhatsApp Business al (656) 222-0119 o desde la página de <a href="contacto.html">Contacto</a>.</p>
     <p><a href="index.html">Volver a la tienda</a></p>
+    <script>
+      const session = new URLSearchParams(location.search).get("session_id");
+      const status = document.getElementById("orderStatus");
+      status.textContent = session && /^cs_(test|live)_[A-Za-z0-9]+$/.test(session)
+        ? "Has regresado desde la pantalla de pago. Tu pedido está pendiente de verificación: espera la confirmación de AGUILA STORE antes de considerarlo aceptado."
+        : "No hay un pago verificable en este enlace. Volver a esta página directamente no crea pedidos ni confirma pagos.";
+    </script>
   </main>
 </body>
 </html>
