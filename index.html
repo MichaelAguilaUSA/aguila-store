@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aguila Store 2.0</title>
   <link rel="stylesheet" href="styles.css?v=20261020-4">
-  <link rel="stylesheet" href="modern.css?v=20261020-8">
+  <link rel="stylesheet" href="modern.css?v=20261020-9">
 </head>
 <body>
   <header class="site-header">
@@ -150,7 +150,7 @@
     </div>
   </footer>
 
-  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Carrito de compras">
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" inert aria-label="Carrito de compras">
     <div class="drawer-panel">
       <div class="drawer-header">
         <div>
@@ -168,13 +168,15 @@
           <strong id="subtotal">$0.00</strong>
         </div>
         <div>
-          <span>Envio</span>
+          <span>Envío e impuestos</span>
           <strong id="shipping">$0.00</strong>
         </div>
         <div class="total-row">
-          <span>Total</span>
+          <span>Total definitivo</span>
           <strong id="total">$0.00</strong>
         </div>
+        <p class="cart-final-note" id="cartFinalNote"></p>
+        <button type="button" class="clear-cart-button" id="clearCart">Vaciar carrito</button>
         <button class="button primary checkout-button" id="checkoutButton" type="button">Finalizar pedido</button>
         <p class="checkout-message" id="checkoutMessage" role="status"></p>
       </div>
@@ -247,6 +249,6 @@
     </article>
   </template>
 
-  <script src="app.js?v=20261020-4"></script>
+  <script src="app.js?v=20261020-5"></script>
 </body>
 </html>
