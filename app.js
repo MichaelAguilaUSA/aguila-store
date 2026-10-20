@@ -119,6 +119,19 @@ function renderProducts() {
     mainPhoto.loading = "eager";
     mainPhoto.decoding = "async";
     media.append(mainPhoto);
+    mainPhoto.classList.add("product-open-image");
+    mainPhoto.setAttribute("tabindex", "0");
+    mainPhoto.setAttribute("role", "button");
+    mainPhoto.setAttribute("aria-label", "Ver detalles de " + product.badge);
+    mainPhoto.addEventListener("click", () => openProductDialog(product.id, mainPhoto.src));
+    mainPhoto.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openProductDialog(product.id, mainPhoto.src); }
+    });
+    card.querySelector("h3").classList.add("product-open-title");
+    card.querySelector("h3").setAttribute("tabindex", "0");
+    card.querySelector("h3").setAttribute("role", "button");
+    card.querySelector("h3").addEventListener("click", () => openProductDialog(product.id, mainPhoto.src));
+    card.querySelector("h3").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProductDialog(product.id, mainPhoto.src); } });
     card.querySelector(".badge").textContent = product.badge;
     card.querySelector(".category").textContent = "FLEECE EAR MUFFS · ADULTOS";
     card.querySelector("h3").textContent = `Orejeras fleece — ${product.badge}`;
@@ -277,3 +290,58 @@ cartDrawer.addEventListener("click", (event) => {
 
 renderProducts();
 renderCart();
+
+
+const productDialog = document.querySelector("#productDialog");
+const dialogPack = document.querySelector("#dialogPack");
+const dialogPhoto = document.querySelector("#dialogPhoto");
+const dialogThumbnails = document.querySelector("#dialogThumbnails");
+const dialogPrice = document.querySelector("#dialogPrice");
+const dialogTitle = document.querySelector("#dialogTitle");
+let dialogProductId = "orejeras-fleece-2";
+
+function updateDialogPack() {
+  dialogProductId = dialogPack.value;
+  const product = products.find(p => p.id === dialogProductId);
+  dialogPrice.textContent = money.format(product.price);
+  dialogTitle.textContent = "Orejeras fleece — " + product.badge;
+}
+
+function openProductDialog(productId, photo) {
+  if (!productDialog || typeof productDialog.showModal !== "function") return;
+  dialogPack.value = products.some(p => p.id === productId) ? productId : products[0].id;
+  updateDialogPack();
+  dialogPhoto.src = photo || products.find(p => p.id === dialogProductId).image;
+  dialogPhoto.alt = "Orejeras de tejido polar para adultos, vista ampliada";
+  const images = [
+    ["images/orejeras-negras.webp", "Negro"],
+    ["images/orejeras-grises.webp", "Gris"],
+    ["images/orejeras-vino.webp", "Rojo vino"],
+    ["images/orejeras-camionero.webp", "En uso"]
+  ];
+  dialogThumbnails.replaceChildren();
+  images.forEach(([src, label]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "dialog-thumbnail";
+    b.setAttribute("aria-label", "Ver foto: " + label);
+    b.setAttribute("aria-pressed", String(dialogPhoto.src.includes(src)));
+    const im = document.createElement("img");
+    im.src = src;
+    im.alt = "";
+    b.append(im);
+    b.addEventListener("click", () => {
+      dialogPhoto.src = src;
+      dialogPhoto.alt = "Orejeras, " + label;
+      dialogThumbnails.querySelectorAll("button").forEach(btn => btn.setAttribute("aria-pressed", String(btn === b)));
+    });
+    dialogThumbnails.append(b);
+  });
+  productDialog.showModal();
+}
+
+document.querySelectorAll("[data-open-product]").forEach(button => button.addEventListener("click", () => openProductDialog(button.dataset.openProduct, button.dataset.photo)));
+dialogPack?.addEventListener("change", updateDialogPack);
+document.querySelector("#closeProductDialog")?.addEventListener("click", () => productDialog.close());
+productDialog?.addEventListener("click", event => { if (event.target === productDialog) productDialog.close(); });
+document.querySelector("#dialogAdd")?.addEventListener("click", () => { productDialog.close(); addToCart(dialogProductId); });
