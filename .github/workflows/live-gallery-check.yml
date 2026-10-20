@@ -1,0 +1,61 @@
+name: Verificar galería publicada
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/live-gallery-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  galeria:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Preparar navegador
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Probar la galería REAL de GitHub Pages
+        run: |
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const assert=require('node:assert/strict');
+          (async()=>{
+            const b=await chromium.launch({headless:true,args:['--no-sandbox']});
+            for (const [name,width,height] of [['desktop',1440,900],['movil',390,844]]) {
+              const page=await b.newPage({viewport:{width,height}});
+              const uri='https://michaelaguilausa.github.io/aguila-store/?verificacion='+Date.now()+'#colores';
+              const response=await page.goto(uri,{waitUntil:'networkidle',timeout:30000});
+              assert.equal(response.status(),200);
+              console.log(name+' VERSION PUBLICA: '+response.status());
+              const links=page.locator('.gallery-grid a.gallery-photo-link');
+              assert.equal(await links.count(),4,'Deben existir cuatro enlaces en la galeria');
+              for (let i=0;i<4;i++){
+                const link=links.nth(i);
+                const href=await link.getAttribute('href');
+                assert.ok(href.startsWith('#vista-'),'Enlace debe apuntar a ventana interna. Enlace encontrado: '+href);
+                await link.click();
+                const id=href.substring(1);
+                const view=page.locator('#'+id);
+                await view.waitFor({state:'visible',timeout:3000});
+                assert.equal(await view.evaluate(e=>getComputedStyle(e).display),'flex');
+                const close=view.locator('.gallery-lightbox-close');
+                assert.ok(await close.isVisible(),'X debe ser visible');
+                await close.click();
+                assert.equal(await view.isVisible(),false,'Al pulsar X debe cerrar la imagen');
+                assert.ok(!page.url().includes('.webp'),'No navegar fuera de la tienda');
+                console.log(name+' FOTO '+(i+1)+' ABRE, X VISIBLE Y CIERRA - OK');
+              }
+              await page.close();
+            }
+            await b.close();
+            console.log('RESULTADO: GALERIA PUBLICA OPERATIVA EN ESCRITORIO Y MOVIL');
+          })().catch(e=>{console.error('FALLO EN LA GALERIA REAL: ',e);process.exit(1)});
+          NODE
