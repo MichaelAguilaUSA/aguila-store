@@ -415,3 +415,25 @@ select { background: #fff; border: 1px solid #d9e2e8; border-radius: 10px; font-
 .gallery-lightbox-footer{width:100%;padding:12px 5px 3px;display:flex;justify-content:space-between;align-items:center;gap:15px;color:#14243c}
 .gallery-lightbox-shop{color:#bd2338;font-weight:750;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:600px){.gallery-lightbox{padding:9px}.gallery-lightbox-panel{padding:52px 10px 14px;max-height:95dvh}.gallery-lightbox-panel>img{max-height:calc(95dvh - 160px)}.gallery-lightbox-footer{font-size:.83rem;flex-wrap:wrap}.gallery-lightbox-close{right:12px;top:9px}}
+
+
+/* Ajuste 20/10: eliminar el "marco flotante" al ampliar fotos.
+   El desplazamiento suave del tema original seguía animando el salto de ancla,
+   y las tarjetas de la galería tenían un transform al pasar el cursor. */
+html { scroll-behavior: auto; }
+.gallery-grid .gallery-product-card,
+.gallery-grid .gallery-product-card:hover,
+.gallery-grid .gallery-product-card:focus-within {
+  transform: none;
+  transition: none;
+}
+body:has(.gallery-lightbox:target) .gallery-grid {
+  visibility: hidden;
+}
+.gallery-lightbox,
+.gallery-lightbox:target,
+.gallery-lightbox-panel,
+.gallery-lightbox-panel > img {
+  animation: none;
+  transition: none;
+}
