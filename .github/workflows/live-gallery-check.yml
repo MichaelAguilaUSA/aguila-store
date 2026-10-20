@@ -55,6 +55,33 @@ jobs:
                 assert.ok(!page.url().includes('.webp'));
                 console.log(name+' FOTO '+(i+1)+' MODAL NATIVO ABRE Y CIERRA - OK');
               }
+              // Carrito real: aumentar, disminuir, eliminar y persistencia tras recarga.
+              await page.locator('.product-featured-card .add-button').first().click();
+              const cart=page.locator('#cartDrawer');
+              assert.ok(await cart.evaluate(e=>e.classList.contains('open')));
+              assert.equal(await page.locator('#cartCount').innerText(),'1');
+              assert.equal(await page.locator('#subtotal').innerText(),'$12.99');
+              assert.equal(await page.locator('#shipping').innerText(),'A confirmar');
+              assert.equal(await page.locator('#total').innerText(),'Pendiente');
+              assert.equal(await page.locator('#checkoutButton').isDisabled(),true);
+              await page.locator('.quantity button').last().click();
+              assert.equal(await page.locator('#subtotal').innerText(),'$25.98');
+              await page.locator('.quantity button').first().click();
+              assert.equal(await page.locator('#subtotal').innerText(),'$12.99');
+              await page.locator('#closeCart').click();
+              await page.reload({waitUntil:'networkidle'});
+              assert.equal(await page.locator('#cartCount').innerText(),'1','persiste carrito');
+              await page.locator('#openCart').click();
+              await page.locator('.remove-cart-line').click();
+              assert.equal(await page.locator('#cartCount').innerText(),'0');
+              await page.locator('#closeCart').click();
+              await page.locator('.product-featured-card .add-button').last().click();
+              await page.locator('#clearCart').click();
+              assert.equal(await page.locator('#cartCount').innerText(),'0');
+              assert.equal(await page.locator('#checkoutButton').isDisabled(),true);
+              await page.keyboard.press('Escape');
+              assert.ok(!(await cart.evaluate(e=>e.classList.contains('open'))));
+              console.log(name+' CARRITO: AÑADIR, CAMBIAR CANTIDAD, ELIMINAR, VACIAR, PERSISTENCIA Y SIN PAGOS - OK');
               await page.screenshot({path:'artifacts/galeria/'+name+'-galeria.png',fullPage:false});
               await page.close();
             }
