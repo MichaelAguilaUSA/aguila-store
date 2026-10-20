@@ -37,8 +37,9 @@ jobs:
               [{id:'orejeras-fleece-2',qty:21}],
               [{id:'orejeras-fleece-2',qty:1},{id:'orejeras-fleece-2',qty:1}],
               [{id:'__proto__',qty:1}],
-              [{id:'orejeras-fleece-2',qty:20},{id:'orejeras-fleece-3',qty:20}]
+              [{id:'orejeras-fleece-2',qty:20},{id:'orejeras-fleece-3',qty:20},{id:'orejeras-fleece-2',qty:1}]
             ]) assert.equal(validateCart(items).ok,false,JSON.stringify(items));
+            assert.equal(validateCart([{id:'orejeras-fleece-2',qty:20},{id:'orejeras-fleece-3',qty:20}]).ok,true,'100 unidades exactas');
             const base={httpMethod:'POST',headers:{origin:'https://michaelaguilausa.github.io'},body:JSON.stringify({items:[{id:'orejeras-fleece-2',qty:1}]})};
             let res=await handler(base);
             assert.equal(res.statusCode,503);
