@@ -39,3 +39,56 @@ assert.equal(requested,1);
 const h=await handleRequest(new Request(base+"/health"),env,mockFetch);
 assert.equal((await h.json()).webPaymentsEnabled,false);
 console.log("WORKERS TEST OK: apagado por defecto, CORS, carritos y checkout simulado; cero cobros");
+
+
+// Stripe webhook: HMAC real de prueba, D1 simulado, rechazo LIVE e idempotencia.
+const webhookEnv={...enabled,STRIPE_WEBHOOK_SECRET:"whsec_unit_fake"};
+const recorded=new Map();
+let attemptedInserts=0;
+webhookEnv.DB={prepare(sql){
+ assert.ok(sql.includes("ON CONFLICT(session_id) DO NOTHING"));
+ return {bind(...values){return {async run(){
+   attemptedInserts++;
+   if(!recorded.has(values[0]))recorded.set(values[0],values);
+   return {success:true};
+ }};}};
+}};
+async function signedWebhook(event, opts={}){
+ const body=JSON.stringify(event);
+ const timestamp=opts.timestamp??Math.floor(Date.now()/1000);
+ const key=await crypto.subtle.importKey("raw",new TextEncoder().encode(webhookEnv.STRIPE_WEBHOOK_SECRET),
+   {name:"HMAC",hash:"SHA-256"},false,["sign"]);
+ const sig=new Uint8Array(await crypto.subtle.sign("HMAC",key,new TextEncoder().encode(timestamp+"."+body)));
+ const hex=Array.from(sig,b=>b.toString(16).padStart(2,"0")).join("");
+ return new Request(base+"/stripe-webhook",{method:"POST",headers:{
+   "Stripe-Signature":"t="+timestamp+",v1="+(opts.invalid?"0".repeat(64):hex)
+ },body});
+}
+const paidEvent={id:"evt_test_unit123",livemode:false,type:"checkout.session.completed",data:{
+ object:{id:"cs_test_unit123",livemode:false,mode:"payment",payment_status:"paid",
+ amount_total:1698,currency:"usd",
+ metadata:{total_units:"2",items:'[{"id":"orejeras-fleece-2","qty":1}]'},
+ customer_details:{email:"not-for-storage@example.invalid"}}}};
+r=await handleRequest(await signedWebhook(paidEvent,{invalid:true}),webhookEnv,mockFetch);
+assert.equal(r.status,400);
+r=await handleRequest(await signedWebhook(paidEvent,{timestamp:Math.floor(Date.now()/1000)-3600}),webhookEnv,mockFetch);
+assert.equal(r.status,400);
+r=await handleRequest(await signedWebhook({...paidEvent,livemode:true}),webhookEnv,mockFetch);
+assert.equal(r.status,403);
+assert.equal(recorded.size,0);
+r=await handleRequest(await signedWebhook(paidEvent),{...webhookEnv,DB:undefined},mockFetch);
+assert.equal(r.status,503);
+r=await handleRequest(await signedWebhook({...paidEvent,data:{object:{...paidEvent.data.object,payment_status:"unpaid"}}}),webhookEnv,mockFetch);
+assert.equal(r.status,200);
+assert.equal(recorded.size,0);
+r=await handleRequest(await signedWebhook(paidEvent),webhookEnv,mockFetch);
+assert.equal(r.status,200);
+assert.equal(recorded.size,1);
+r=await handleRequest(await signedWebhook(paidEvent),webhookEnv,mockFetch);
+assert.equal(r.status,200);
+assert.equal(recorded.size,1);
+assert.equal(attemptedInserts,2);
+const stored=JSON.stringify([...recorded.values()]);
+assert.ok(!stored.includes("not-for-storage"));
+assert.ok(!stored.includes("sk_test_"));
+console.log("WORKERS WEBHOOK OK: HMAC real, caducidad, rechazo LIVE, D1 idempotente, sin PII");
