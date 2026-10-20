@@ -16,4 +16,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node cloudflare/test.mjs
+      - name: Validar seguridad y compras simuladas sin cobros
+        run: node cloudflare/test.mjs
+      - name: Compilar Cloudflare Worker realmente sin publicar
+        working-directory: cloudflare
+        run: |
+          npx --yes wrangler@4 deploy --dry-run --outdir dist
+          test -n "$(find dist -type f -name '*.js' -print -quit)"
+          echo "WORKER COMPILADO CORRECTAMENTE; NO SE HA DESPLEGADO"
