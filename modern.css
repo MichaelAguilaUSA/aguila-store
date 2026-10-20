@@ -402,3 +402,16 @@ select { background: #fff; border: 1px solid #d9e2e8; border-radius: 10px; font-
 @media(max-width:650px){.product-dialog{max-height:94vh;overflow:auto}.product-dialog-layout{display:block}.product-dialog-media{padding:42px 12px 17px}.product-dialog-media>img{height:210px}.product-dialog-info{padding:23px 20px 27px;gap:13px}.dialog-thumbnail{height:53px;width:58px}.photo-action{bottom:12px;right:10px;padding:8px 10px;font-size:.7rem}}
 
 .gallery-shop-link{display:inline-flex;color:#b42138;font-weight:750;font-size:.82rem;text-decoration:underline;text-underline-offset:3px;padding:4px 0}.gallery-shop-link:hover{color:#8d1a30}.gallery-photo-link{text-decoration:none;color:inherit}.gallery-photo-link:hover .gallery-action{text-decoration:underline}
+
+
+/* Galería ampliada con botón X. Funciona solo con anclas HTML/CSS. */
+.gallery-lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+.gallery-lightbox:target{display:flex}
+.gallery-lightbox-backdrop{position:absolute;inset:0;background:rgba(10,28,50,.83);cursor:zoom-out}
+.gallery-lightbox-panel{position:relative;z-index:1;width:min(920px,100%);max-height:92dvh;display:flex;flex-direction:column;align-items:center;background:#fff;border-radius:16px;padding:46px 20px 14px;box-shadow:0 20px 72px rgba(5,24,48,.3)}
+.gallery-lightbox-panel>img{width:100%;max-height:calc(92dvh - 145px);object-fit:contain}
+.gallery-lightbox-close{position:absolute;right:12px;top:10px;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#fff;color:#14243c;border:2px solid #d1dbe4;font-size:32px;font-weight:600;line-height:1;text-decoration:none;z-index:3}
+.gallery-lightbox-close:hover,.gallery-lightbox-close:focus-visible{background:#bd2338;color:white;border-color:#bd2338}
+.gallery-lightbox-footer{width:100%;padding:12px 5px 3px;display:flex;justify-content:space-between;align-items:center;gap:15px;color:#14243c}
+.gallery-lightbox-shop{color:#bd2338;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:600px){.gallery-lightbox{padding:9px}.gallery-lightbox-panel{padding:52px 10px 14px;max-height:95dvh}.gallery-lightbox-panel>img{max-height:calc(95dvh - 160px)}.gallery-lightbox-footer{font-size:.83rem;flex-wrap:wrap}.gallery-lightbox-close{right:12px;top:9px}}
