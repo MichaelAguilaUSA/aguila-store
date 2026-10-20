@@ -345,3 +345,21 @@ dialogPack?.addEventListener("change", updateDialogPack);
 document.querySelector("#closeProductDialog")?.addEventListener("click", () => productDialog.close());
 productDialog?.addEventListener("click", event => { if (event.target === productDialog) productDialog.close(); });
 document.querySelector("#dialogAdd")?.addEventListener("click", () => { productDialog.close(); addToCart(dialogProductId); });
+
+
+/* Galería: un único diálogo nativo en la capa superior del navegador. */
+const galleryViewer = document.querySelector("#galleryViewer");
+const galleryViewerImage = document.querySelector("#galleryViewerImage");
+const galleryViewerTitle = document.querySelector("#galleryViewerTitle");
+document.querySelectorAll("[data-gallery-src]").forEach(button => {
+  button.addEventListener("click", () => {
+    galleryViewerImage.src = button.dataset.gallerySrc;
+    galleryViewerImage.alt = "Fotografía ampliada: " + button.dataset.galleryLabel;
+    galleryViewerTitle.textContent = button.dataset.galleryLabel;
+    if (!galleryViewer.open) galleryViewer.showModal();
+  });
+});
+galleryViewer?.addEventListener("click", event => {
+  if (event.target === galleryViewer) galleryViewer.close();
+});
+document.querySelector("#galleryViewerShop")?.addEventListener("click", () => galleryViewer.close());
