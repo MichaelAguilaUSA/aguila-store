@@ -299,7 +299,7 @@ function renderCart() {
   total.textContent = money.format(previewTotal);
   clearCartButton.disabled = itemCount === 0;
   cartFinalNote.textContent = itemCount
-    ? "Importe estimado para EE. UU., sin impuestos. Envío según tarifa de $3.99 publicada; pendiente de validación antes de habilitar las compras. El total definitivo se confirmará antes de pagar."
+    ? "Importe estimado para EE. UU., sin impuestos. Envío según tarifa de $3.99 publicada. El total definitivo se confirmará antes de pagar."
     : "Añade productos para ver el subtotal, envío y total estimado.";
   if (CHECKOUT_ENABLED) {
     checkoutButton.disabled = !itemCount;
