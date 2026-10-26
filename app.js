@@ -9,7 +9,20 @@ const products = [
     image: "images/orejeras-negras.webp",
     imageAlt: "Orejeras negras de tejido polar sobre fondo blanco, fotografía de presentación",
     badge: "Paquete de 2",
-    type: "winter"
+    type: "winter",
+    cardCategory: "FLEECE EAR MUFFS · ADULTOS",
+    cardTitle: "Orejeras fleece — Paquete de 2",
+    packCount: "Incluye 2 unidades completas",
+    cardDescription: "Suaves orejeras de tejido polar para adulto. Se usan con la banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad.",
+    views: [
+      {src: "images/orejeras-negras.webp", alt: "Orejeras negras de tejido polar sobre fondo blanco, fotografía de presentación", label: "Vista principal"},
+      {src: "images/orejeras-vino.webp", alt: "Orejeras de tejido polar en color rojo vino", label: "Rojo vino"},
+      {src: "images/orejeras-camionero.webp", alt: "Orejeras negras colocadas detrás de la cabeza, fotografía del producto en uso", label: "En uso"}
+    ],
+    dialogImages: [["images/orejeras-negras.webp", "Negro"], ["images/orejeras-grises.webp", "Gris"], ["images/orejeras-vino.webp", "Rojo vino"], ["images/orejeras-camionero.webp", "En uso"]],
+    dialogAlt: "Orejeras de tejido polar para adultos, vista ampliada",
+    dialogAltPrefix: "Orejeras",
+    dialogOption: "Paquete de 2 unidades — $12.99"
   },
   {
     id: "orejeras-fleece-3",
@@ -21,7 +34,45 @@ const products = [
     image: "images/orejeras-grises.webp",
     imageAlt: "Orejeras grises de tejido polar sobre fondo blanco, fotografía de presentación",
     badge: "Paquete de 3",
-    type: "winter"
+    type: "winter",
+    cardCategory: "FLEECE EAR MUFFS · ADULTOS",
+    cardTitle: "Orejeras fleece — Paquete de 3",
+    packCount: "Incluye 3 unidades completas",
+    cardDescription: "Suaves orejeras de tejido polar para adulto. Se usan con la banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad.",
+    views: [
+      {src: "images/orejeras-grises.webp", alt: "Orejeras grises de tejido polar sobre fondo blanco, fotografía de presentación", label: "Vista principal"},
+      {src: "images/orejeras-vino.webp", alt: "Orejeras de tejido polar en color rojo vino", label: "Rojo vino"},
+      {src: "images/orejeras-camionero.webp", alt: "Orejeras negras colocadas detrás de la cabeza, fotografía del producto en uso", label: "En uso"}
+    ],
+    dialogImages: [["images/orejeras-negras.webp", "Negro"], ["images/orejeras-grises.webp", "Gris"], ["images/orejeras-vino.webp", "Rojo vino"], ["images/orejeras-camionero.webp", "En uso"]],
+    dialogAlt: "Orejeras de tejido polar para adultos, vista ampliada",
+    dialogAltPrefix: "Orejeras",
+    dialogOption: "Paquete de 3 unidades — $16.99"
+  },
+  {
+    id: "libretas-navidad-4",
+    name: "LIBRETAS NAVIDEÑAS — Set de 4",
+    category: "Navidad",
+    description: "Set de 4 mini libretas navideñas de 80 hojas con aro metálico, una de cada diseño: Santa, muñeco de nieve, oso y reno. Presentadas en paquete con tarjeta kraft y cordón de yute.",
+    price: 14.99,
+    stripePriceId: "price_1UUsiTMHMUnGAXSuwTGTzWkW",
+    image: "libretas-navidad-principal.jpg",
+    imageAlt: "Tarjeta del set de 4 libretas navideñas de AGUILA STORE con fotografías del paquete y el precio de $14.99",
+    badge: "Set de 4",
+    type: "christmas",
+    cardCategory: "LIBRETAS NAVIDEÑAS · SET DE 4",
+    cardTitle: "Libretas navideñas — Set de 4",
+    packCount: "Incluye 4 libretas, una de cada diseño",
+    cardDescription: "Cuatro mini libretas navideñas de 80 hojas con aro metálico: Santa, muñeco de nieve, oso y reno. Se presentan en paquete con tarjeta kraft y cordón de yute, listas para regalar.",
+    views: [
+      {src: "libretas-navidad-principal.jpg", alt: "Tarjeta del set de 4 libretas navideñas de AGUILA STORE con fotografías del paquete y el precio de $14.99", label: "Vista principal"},
+      {src: "libretas-navidad-disenos.jpg", alt: "Las cuatro libretas navideñas con sus diseños: Santa, muñeco de nieve, oso y reno", label: "Los 4 diseños"},
+      {src: "04-abanico.jpg", alt: "Libreta navideña de muñeco de nieve abierta en abanico mostrando las hojas", label: "Detalle de hojas"}
+    ],
+    dialogImages: [["libretas-navidad-principal.jpg", "Presentación"], ["libretas-navidad-disenos.jpg", "Los 4 diseños"], ["04-abanico.jpg", "Detalle de hojas"]],
+    dialogAlt: "Libretas navideñas, vista ampliada",
+    dialogAltPrefix: "Libretas navideñas",
+    dialogOption: "Set de 4 libretas — $14.99"
   }
 ];
 
@@ -155,19 +206,13 @@ function renderProducts() {
     card.querySelector("h3").addEventListener("click", () => openProductDialog(product.id, mainPhoto.src));
     card.querySelector("h3").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProductDialog(product.id, mainPhoto.src); } });
     card.querySelector(".badge").textContent = product.badge;
-    card.querySelector(".category").textContent = "FLEECE EAR MUFFS · ADULTOS";
-    card.querySelector("h3").textContent = `Orejeras fleece — ${product.badge}`;
-    card.querySelector(".product-pack-count").textContent =
-      product.id === "orejeras-fleece-2" ? "Incluye 2 unidades completas" : "Incluye 3 unidades completas";
-    card.querySelector(".description").textContent =
-      "Suaves orejeras de tejido polar para adulto. Se usan con la banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad.";
+    card.querySelector(".category").textContent = product.cardCategory;
+    card.querySelector("h3").textContent = product.cardTitle;
+    card.querySelector(".product-pack-count").textContent = product.packCount;
+    card.querySelector(".description").textContent = product.cardDescription;
     card.querySelector(".price").textContent = money.format(product.price);
 
-    const views = [
-      {src: product.image, alt: product.imageAlt, label: "Vista principal"},
-      {src: "images/orejeras-vino.webp", alt: "Orejeras de tejido polar en color rojo vino", label: "Rojo vino"},
-      {src: "images/orejeras-camionero.webp", alt: "Orejeras negras colocadas detrás de la cabeza, fotografía del producto en uso", label: "En uso"}
-    ];
+    const views = product.views;
     const gallery = card.querySelector(".product-thumbnails");
     views.forEach((view, index) => {
       const thumb = document.createElement("button");
@@ -363,21 +408,17 @@ function updateDialogPack() {
   dialogProductId = dialogPack.value;
   const product = products.find(p => p.id === dialogProductId);
   dialogPrice.textContent = money.format(product.price);
-  dialogTitle.textContent = "Orejeras fleece — " + product.badge;
+  dialogTitle.textContent = product.cardTitle;
 }
 
 function openProductDialog(productId, photo) {
   if (!productDialog || typeof productDialog.showModal !== "function") return;
   dialogPack.value = products.some(p => p.id === productId) ? productId : products[0].id;
   updateDialogPack();
-  dialogPhoto.src = photo || products.find(p => p.id === dialogProductId).image;
-  dialogPhoto.alt = "Orejeras de tejido polar para adultos, vista ampliada";
-  const images = [
-    ["images/orejeras-negras.webp", "Negro"],
-    ["images/orejeras-grises.webp", "Gris"],
-    ["images/orejeras-vino.webp", "Rojo vino"],
-    ["images/orejeras-camionero.webp", "En uso"]
-  ];
+  const product = products.find(p => p.id === dialogProductId);
+  dialogPhoto.src = photo || product.image;
+  dialogPhoto.alt = product.dialogAlt;
+  const images = product.dialogImages;
   dialogThumbnails.replaceChildren();
   images.forEach(([src, label]) => {
     const b = document.createElement("button");
@@ -391,7 +432,7 @@ function openProductDialog(productId, photo) {
     b.append(im);
     b.addEventListener("click", () => {
       dialogPhoto.src = src;
-      dialogPhoto.alt = "Orejeras, " + label;
+      dialogPhoto.alt = product.dialogAltPrefix + ", " + label;
       dialogThumbnails.querySelectorAll("button").forEach(btn => btn.setAttribute("aria-pressed", String(btn === b)));
     });
     dialogThumbnails.append(b);
@@ -400,6 +441,9 @@ function openProductDialog(productId, photo) {
 }
 
 document.querySelectorAll("[data-open-product]").forEach(button => button.addEventListener("click", () => openProductDialog(button.dataset.openProduct, button.dataset.photo)));
+if (dialogPack) {
+  dialogPack.replaceChildren(...products.map(p => new Option(p.dialogOption, p.id)));
+}
 dialogPack?.addEventListener("change", updateDialogPack);
 document.querySelector("#closeProductDialog")?.addEventListener("click", () => productDialog.close());
 productDialog?.addEventListener("click", event => { if (event.target === productDialog) productDialog.close(); });
