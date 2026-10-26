@@ -75,8 +75,8 @@ const cartFinalNote = document.querySelector("#cartFinalNote");
 // a Stripe Checkout. La clave secreta NUNCA está en este archivo.
 // CHECKOUT_ENABLED se activa solo en las pruebas del PASO 5 y tras el
 // "LANZAR" de Michael. CHECKOUT_API_URL se rellena al desplegar el servicio.
-const CHECKOUT_ENABLED = false;
-const CHECKOUT_API_URL = "";
+const CHECKOUT_ENABLED = true;
+const CHECKOUT_API_URL = "https://aguila-store-checkout.lanielgarcia49.workers.dev";
 
 async function startCheckout() {
   const items = [...state.cart.entries()].map(([id, qty]) => ({ id, qty }));
