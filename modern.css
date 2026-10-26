@@ -37,7 +37,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 }
 .brand { font-size: 1rem; font-weight: 850; letter-spacing: .035em; color: var(--navy); }
 .brand span { text-shadow: none; }
-.brand-mark { width: 40px; height: 40px; filter: none; }
+.brand-mark { width: 46px; height: 46px; filter: none; border-radius: 50%; }
 .desktop-nav { margin-left: auto; gap: 27px; font-size: .92rem; color: #415168; font-weight: 650; }
 .desktop-nav a:hover, .mini-link:hover { color: var(--red); }
 .desktop-nav a::after { bottom: -10px; height: 2px; }
@@ -244,7 +244,7 @@ select { background: #fff; border: 1px solid #d9e2e8; border-radius: 10px; font-
   html { scroll-padding-top: 130px; }
   .site-header { flex-wrap: wrap; min-height: auto; gap: 12px; padding: 13px 16px 10px; }
   .brand { font-size: .92rem; }
-  .brand-mark { width: 36px; height: 36px; }
+  .brand-mark { width: 40px; height: 40px; }
   .header-actions { margin-left: auto; }
   .mini-link { display:none; }
   .desktop-nav {
