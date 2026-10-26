@@ -73,6 +73,323 @@ const products = [
     dialogAlt: "Libretas navideñas, vista ampliada",
     dialogAltPrefix: "Libretas navideñas",
     dialogOption: "Set de 4 libretas — $14.99"
+  },
+  {
+    id: "bufanda-mascotas",
+    cardOnly: true,
+    defaultOption: "bufanda-santa-s",
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos. Cuatro diseños: Santa Claus, reno, muñeco de nieve y campana. Tallas S, M y L.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-santa.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus",
+    badge: "4 diseños",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña para mascotas",
+    packCount: "4 diseños · Tallas S, M y L",
+    cardDescription: "Bufanda navideña tejida para perros y gatos: Santa Claus, reno, muñeco de nieve o campana. Escoge diseño y talla al ver el detalle.",
+    views: [
+      {src: "bufandas-4-disenos-blanco.jpg", alt: "Las cuatro bufandas navideñas para mascotas: Santa Claus, reno, muñeco de nieve y campana", label: "Los 4 diseños"},
+      {src: "bufanda-santa.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus", label: "Santa Claus"},
+      {src: "bufanda-reno-reindeer.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de reno", label: "Reno"},
+      {src: "bufanda-muneco-snowman.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de muñeco de nieve", label: "Muñeco de nieve"},
+      {src: "bufanda-campana-bell.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de campana", label: "Campana"}
+    ],
+    dialogImages: [["bufandas-4-disenos-blanco.jpg", "Los 4 diseños"], ["bufanda-santa.jpg", "Santa Claus"], ["bufanda-reno-reindeer.jpg", "Reno"], ["bufanda-muneco-snowman.jpg", "Muñeco de nieve"], ["bufanda-campana-bell.jpg", "Campana"]],
+    dialogAlt: "Bufanda navideña para mascotas, vista ampliada",
+    dialogAltPrefix: "Bufanda navideña",
+    dialogOption: ""
+  },
+  {
+    id: "bufanda-santa-s",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Santa Claus · Talla S",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Santa Claus. Tejido de punto suave y flexible. Talla S.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-santa.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus",
+    badge: "Talla S",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Santa Claus · S",
+    packCount: "1 bufanda · Talla S",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Santa Claus. Tejido de punto suave y flexible. Talla S.",
+    views: [
+      {src: "bufanda-santa.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus", label: "Santa Claus"}
+    ],
+    dialogImages: [["bufanda-santa.jpg", "Santa Claus"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Santa Claus, vista ampliada",
+    dialogAltPrefix: "Bufanda Santa Claus",
+    dialogOption: "Santa Claus · Talla S — $9.99"
+  },
+  {
+    id: "bufanda-santa-m",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Santa Claus · Talla M",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Santa Claus. Tejido de punto suave y flexible. Talla M.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-santa.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus",
+    badge: "Talla M",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Santa Claus · M",
+    packCount: "1 bufanda · Talla M",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Santa Claus. Tejido de punto suave y flexible. Talla M.",
+    views: [
+      {src: "bufanda-santa.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus", label: "Santa Claus"}
+    ],
+    dialogImages: [["bufanda-santa.jpg", "Santa Claus"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Santa Claus, vista ampliada",
+    dialogAltPrefix: "Bufanda Santa Claus",
+    dialogOption: "Santa Claus · Talla M — $9.99"
+  },
+  {
+    id: "bufanda-santa-l",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Santa Claus · Talla L",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Santa Claus. Tejido de punto suave y flexible. Talla L.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-santa.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus",
+    badge: "Talla L",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Santa Claus · L",
+    packCount: "1 bufanda · Talla L",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Santa Claus. Tejido de punto suave y flexible. Talla L.",
+    views: [
+      {src: "bufanda-santa.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Santa Claus", label: "Santa Claus"}
+    ],
+    dialogImages: [["bufanda-santa.jpg", "Santa Claus"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Santa Claus, vista ampliada",
+    dialogAltPrefix: "Bufanda Santa Claus",
+    dialogOption: "Santa Claus · Talla L — $9.99"
+  },
+  {
+    id: "bufanda-reno-s",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Reno · Talla S",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Reno. Tejido de punto suave y flexible. Talla S.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-reno-reindeer.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Reno",
+    badge: "Talla S",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Reno · S",
+    packCount: "1 bufanda · Talla S",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Reno. Tejido de punto suave y flexible. Talla S.",
+    views: [
+      {src: "bufanda-reno-reindeer.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Reno", label: "Reno"}
+    ],
+    dialogImages: [["bufanda-reno-reindeer.jpg", "Reno"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Reno, vista ampliada",
+    dialogAltPrefix: "Bufanda Reno",
+    dialogOption: "Reno · Talla S — $9.99"
+  },
+  {
+    id: "bufanda-reno-m",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Reno · Talla M",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Reno. Tejido de punto suave y flexible. Talla M.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-reno-reindeer.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Reno",
+    badge: "Talla M",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Reno · M",
+    packCount: "1 bufanda · Talla M",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Reno. Tejido de punto suave y flexible. Talla M.",
+    views: [
+      {src: "bufanda-reno-reindeer.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Reno", label: "Reno"}
+    ],
+    dialogImages: [["bufanda-reno-reindeer.jpg", "Reno"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Reno, vista ampliada",
+    dialogAltPrefix: "Bufanda Reno",
+    dialogOption: "Reno · Talla M — $9.99"
+  },
+  {
+    id: "bufanda-reno-l",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Reno · Talla L",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Reno. Tejido de punto suave y flexible. Talla L.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-reno-reindeer.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Reno",
+    badge: "Talla L",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Reno · L",
+    packCount: "1 bufanda · Talla L",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Reno. Tejido de punto suave y flexible. Talla L.",
+    views: [
+      {src: "bufanda-reno-reindeer.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Reno", label: "Reno"}
+    ],
+    dialogImages: [["bufanda-reno-reindeer.jpg", "Reno"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Reno, vista ampliada",
+    dialogAltPrefix: "Bufanda Reno",
+    dialogOption: "Reno · Talla L — $9.99"
+  },
+  {
+    id: "bufanda-muneco-s",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Muñeco de nieve · Talla S",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Muñeco de nieve. Tejido de punto suave y flexible. Talla S.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-muneco-snowman.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Muñeco de nieve",
+    badge: "Talla S",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Muñeco de nieve · S",
+    packCount: "1 bufanda · Talla S",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Muñeco de nieve. Tejido de punto suave y flexible. Talla S.",
+    views: [
+      {src: "bufanda-muneco-snowman.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Muñeco de nieve", label: "Muñeco de nieve"}
+    ],
+    dialogImages: [["bufanda-muneco-snowman.jpg", "Muñeco de nieve"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Muñeco de nieve, vista ampliada",
+    dialogAltPrefix: "Bufanda Muñeco de nieve",
+    dialogOption: "Muñeco de nieve · Talla S — $9.99"
+  },
+  {
+    id: "bufanda-muneco-m",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Muñeco de nieve · Talla M",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Muñeco de nieve. Tejido de punto suave y flexible. Talla M.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-muneco-snowman.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Muñeco de nieve",
+    badge: "Talla M",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Muñeco de nieve · M",
+    packCount: "1 bufanda · Talla M",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Muñeco de nieve. Tejido de punto suave y flexible. Talla M.",
+    views: [
+      {src: "bufanda-muneco-snowman.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Muñeco de nieve", label: "Muñeco de nieve"}
+    ],
+    dialogImages: [["bufanda-muneco-snowman.jpg", "Muñeco de nieve"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Muñeco de nieve, vista ampliada",
+    dialogAltPrefix: "Bufanda Muñeco de nieve",
+    dialogOption: "Muñeco de nieve · Talla M — $9.99"
+  },
+  {
+    id: "bufanda-muneco-l",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Muñeco de nieve · Talla L",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Muñeco de nieve. Tejido de punto suave y flexible. Talla L.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-muneco-snowman.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Muñeco de nieve",
+    badge: "Talla L",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Muñeco de nieve · L",
+    packCount: "1 bufanda · Talla L",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Muñeco de nieve. Tejido de punto suave y flexible. Talla L.",
+    views: [
+      {src: "bufanda-muneco-snowman.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Muñeco de nieve", label: "Muñeco de nieve"}
+    ],
+    dialogImages: [["bufanda-muneco-snowman.jpg", "Muñeco de nieve"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Muñeco de nieve, vista ampliada",
+    dialogAltPrefix: "Bufanda Muñeco de nieve",
+    dialogOption: "Muñeco de nieve · Talla L — $9.99"
+  },
+  {
+    id: "bufanda-campana-s",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Campana · Talla S",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Campana. Tejido de punto suave y flexible. Talla S.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-campana-bell.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Campana",
+    badge: "Talla S",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Campana · S",
+    packCount: "1 bufanda · Talla S",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Campana. Tejido de punto suave y flexible. Talla S.",
+    views: [
+      {src: "bufanda-campana-bell.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Campana", label: "Campana"}
+    ],
+    dialogImages: [["bufanda-campana-bell.jpg", "Campana"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Campana, vista ampliada",
+    dialogAltPrefix: "Bufanda Campana",
+    dialogOption: "Campana · Talla S — $9.99"
+  },
+  {
+    id: "bufanda-campana-m",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Campana · Talla M",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Campana. Tejido de punto suave y flexible. Talla M.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-campana-bell.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Campana",
+    badge: "Talla M",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Campana · M",
+    packCount: "1 bufanda · Talla M",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Campana. Tejido de punto suave y flexible. Talla M.",
+    views: [
+      {src: "bufanda-campana-bell.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Campana", label: "Campana"}
+    ],
+    dialogImages: [["bufanda-campana-bell.jpg", "Campana"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Campana, vista ampliada",
+    dialogAltPrefix: "Bufanda Campana",
+    dialogOption: "Campana · Talla M — $9.99"
+  },
+  {
+    id: "bufanda-campana-l",
+    variant: true,
+    name: "BUFANDA NAVIDEÑA PARA MASCOTAS — Campana · Talla L",
+    category: "Mascotas",
+    description: "Bufanda navideña tejida para perros y gatos con motivo de Campana. Tejido de punto suave y flexible. Talla L.",
+    price: 9.99,
+    stripePriceId: "price_1UUt6jMHMUnGAXSu20XrR6Ne",
+    image: "bufanda-campana-bell.jpg",
+    imageAlt: "Bufanda navideña tejida para mascotas con diseño de Campana",
+    badge: "Talla L",
+    type: "christmas",
+    cardCategory: "BUFANDA NAVIDEÑA · MASCOTAS",
+    cardTitle: "Bufanda navideña — Campana · L",
+    packCount: "1 bufanda · Talla L",
+    cardDescription: "Bufanda navideña tejida para perros y gatos con motivo de Campana. Tejido de punto suave y flexible. Talla L.",
+    views: [
+      {src: "bufanda-campana-bell.jpg", alt: "Bufanda navideña tejida para mascotas con diseño de Campana", label: "Campana"}
+    ],
+    dialogImages: [["bufanda-campana-bell.jpg", "Campana"]],
+    dialogAlt: "Bufanda navideña para mascotas, diseño Campana, vista ampliada",
+    dialogAltPrefix: "Bufanda Campana",
+    dialogOption: "Campana · Talla L — $9.99"
   }
 ];
 
@@ -158,6 +475,7 @@ function getVisibleProducts() {
   const query = state.query.trim().toLowerCase();
 
   return products
+    .filter((product) => !product.variant)
     .filter((product) => state.category === "Todos" || product.category === state.category)
     .filter((product) => {
       const content = `${product.name} ${product.category} ${product.description}`.toLowerCase();
@@ -413,7 +731,8 @@ function updateDialogPack() {
 
 function openProductDialog(productId, photo) {
   if (!productDialog || typeof productDialog.showModal !== "function") return;
-  dialogPack.value = products.some(p => p.id === productId) ? productId : products[0].id;
+  const openedProduct = products.find(p => p.id === productId);
+  dialogPack.value = openedProduct ? (openedProduct.cardOnly ? openedProduct.defaultOption : openedProduct.id) : products[0].id;
   updateDialogPack();
   const product = products.find(p => p.id === dialogProductId);
   dialogPhoto.src = photo || product.image;
@@ -442,7 +761,7 @@ function openProductDialog(productId, photo) {
 
 document.querySelectorAll("[data-open-product]").forEach(button => button.addEventListener("click", () => openProductDialog(button.dataset.openProduct, button.dataset.photo)));
 if (dialogPack) {
-  dialogPack.replaceChildren(...products.map(p => new Option(p.dialogOption, p.id)));
+  dialogPack.replaceChildren(...products.filter(p => !p.cardOnly).map(p => new Option(p.dialogOption, p.id)));
 }
 dialogPack?.addEventListener("change", updateDialogPack);
 document.querySelector("#closeProductDialog")?.addEventListener("click", () => productDialog.close());
