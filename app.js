@@ -1,55 +1,5 @@
 const products = [
   {
-    id: "orejeras-fleece-2",
-    name: "FLEECE EAR MUFFS — Paquete de 2",
-    category: "Invierno",
-    description: "Paquete de 2 unidades completas de orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
-    price: 12.99,
-    stripePriceId: "price_1USUSaMHMUnGAXSu7LiayJjC",
-    image: "images/orejeras-negras.webp",
-    imageAlt: "Orejeras negras de tejido polar sobre fondo blanco, fotografía de presentación",
-    badge: "Paquete de 2",
-    type: "winter",
-    cardCategory: "FLEECE EAR MUFFS · ADULTOS",
-    cardTitle: "Orejeras fleece — Paquete de 2",
-    packCount: "Incluye 2 unidades completas",
-    cardDescription: "Suaves orejeras de tejido polar para adulto. Se usan con la banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad.",
-    views: [
-      {src: "images/orejeras-negras.webp", alt: "Orejeras negras de tejido polar sobre fondo blanco, fotografía de presentación", label: "Vista principal"},
-      {src: "images/orejeras-vino.webp", alt: "Orejeras de tejido polar en color rojo vino", label: "Rojo vino"},
-      {src: "images/orejeras-camionero.webp", alt: "Orejeras negras colocadas detrás de la cabeza, fotografía del producto en uso", label: "En uso"}
-    ],
-    dialogImages: [["images/orejeras-negras.webp", "Negro"], ["images/orejeras-grises.webp", "Gris"], ["images/orejeras-vino.webp", "Rojo vino"], ["images/orejeras-camionero.webp", "En uso"]],
-    dialogAlt: "Orejeras de tejido polar para adultos, vista ampliada",
-    dialogAltPrefix: "Orejeras",
-    dialogOption: "Paquete de 2 unidades — $12.99"
-  },
-  {
-    id: "orejeras-fleece-3",
-    name: "FLEECE EAR MUFFS — Paquete de 3",
-    category: "Invierno",
-    description: "Paquete de 3 unidades completas de orejeras de tejido polar para adulto, con banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad. Referencia 7051AST.",
-    price: 16.99,
-    stripePriceId: "price_1USUScMHMUnGAXSuAZgDYnu3",
-    image: "images/orejeras-grises.webp",
-    imageAlt: "Orejeras grises de tejido polar sobre fondo blanco, fotografía de presentación",
-    badge: "Paquete de 3",
-    type: "winter",
-    cardCategory: "FLEECE EAR MUFFS · ADULTOS",
-    cardTitle: "Orejeras fleece — Paquete de 3",
-    packCount: "Incluye 3 unidades completas",
-    cardDescription: "Suaves orejeras de tejido polar para adulto. Se usan con la banda detrás de la cabeza. Colores surtidos sujetos a disponibilidad.",
-    views: [
-      {src: "images/orejeras-grises.webp", alt: "Orejeras grises de tejido polar sobre fondo blanco, fotografía de presentación", label: "Vista principal"},
-      {src: "images/orejeras-vino.webp", alt: "Orejeras de tejido polar en color rojo vino", label: "Rojo vino"},
-      {src: "images/orejeras-camionero.webp", alt: "Orejeras negras colocadas detrás de la cabeza, fotografía del producto en uso", label: "En uso"}
-    ],
-    dialogImages: [["images/orejeras-negras.webp", "Negro"], ["images/orejeras-grises.webp", "Gris"], ["images/orejeras-vino.webp", "Rojo vino"], ["images/orejeras-camionero.webp", "En uso"]],
-    dialogAlt: "Orejeras de tejido polar para adultos, vista ampliada",
-    dialogAltPrefix: "Orejeras",
-    dialogOption: "Paquete de 3 unidades — $16.99"
-  },
-  {
     id: "libretas-navidad-4",
     name: "LIBRETAS NAVIDEÑAS — Set de 4",
     category: "Navidad",
@@ -720,7 +670,7 @@ const dialogPhoto = document.querySelector("#dialogPhoto");
 const dialogThumbnails = document.querySelector("#dialogThumbnails");
 const dialogPrice = document.querySelector("#dialogPrice");
 const dialogTitle = document.querySelector("#dialogTitle");
-let dialogProductId = "orejeras-fleece-2";
+let dialogProductId = "libretas-navidad-4";
 
 function updateDialogPack() {
   dialogProductId = dialogPack.value;
