@@ -16,102 +16,108 @@
   <meta name="twitter:description" content="Libretas navideñas y bufandas para mascotas. Compra en línea con envío a todo Estados Unidos.">
   <meta name="twitter:image" content="https://michaelaguilausa.github.io/aguila-store/logo-bandera-en.png">
   <link rel="icon" type="image/png" href="logo-bandera-en.png">
-  <link rel="stylesheet" href="styles.css?v=20261020-4">
-  <link rel="stylesheet" href="modern.css?v=20261026-3">
+  <link rel="stylesheet" href="diseno-2.0.css?v=20261102-2">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Aguila Store inicio">
-      <img src="logo-bandera-en.png" alt="AGUILA STORE" class="brand-mark">
-      <span>Aguila Store</span>
-    </a>
-
-    <nav class="desktop-nav" aria-label="Navegación principal">
-      <a href="#catalogo">Productos</a>
-      <a href="#colores">Galería</a>
-      <a href="#por-que">Nuestra tienda</a>
-      <a href="#aliados">Información</a>
-    </nav>
-
-    <div class="header-actions">
-      <a class="mini-link" href="#catalogo">Ver productos</a>
-      <button class="cart-button" id="openCart" type="button" aria-label="Abrir carrito">
-        <span class="cart-icon" aria-hidden="true"></span>
-        <span class="cart-count" id="cartCount">0</span>
-      </button>
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html#inicio" aria-label="AGUILA STORE, inicio">
+        <img src="logo-bandera-en.png" alt="" width="49" height="49">
+        <span class="brand-name">AGUILA STORE<small>VISIÓN · FUERZA · TRADICIÓN</small></span>
+      </a>
+      <nav class="nav" id="main-nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#catalogo">Productos</a>
+        <a href="#tienda">La tienda</a>
+      </nav>
+      <div class="header-cta">
+        <button class="cart-button" id="openCart" type="button" aria-label="Abrir carrito">
+          <span class="cart-icon" aria-hidden="true"></span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <button type="button" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section class="portada" id="inicio" aria-label="Portada de AGUILA STORE">
-      <div class="portada-panel">
-        <img class="portada-logo" src="logo-bandera-en.png" alt="AGUILA STORE" fetchpriority="high" decoding="async">
-        <div class="portada-rule" aria-hidden="true"></div>
-        <h1 class="portada-title"><span class="portada-line1">PEQUEÑOS DETALLES.</span> <span class="portada-line2">GRANDES ALEGRÍAS.</span></h1>
-        <p class="portada-sub">Descubre algo especial para ti, para tu hogar o para regalar.</p>
-      </div>
-      <div class="portada-cta">
-        <a class="cta-gold" href="#catalogo">Encuentra tu favorito</a>
-      </div>
-    </section>
-
-    <section class="trust-bar" aria-label="Información de compra">
-      <div><strong>Fotografías reales</strong><span>Conoce los productos antes de elegir</span></div>
-      <div><strong>Colores surtidos</strong><span>Sujetos a disponibilidad al preparar el pedido</span></div>
-      <div><strong>Compra segura en línea</strong><span>Pago con Stripe Checkout</span></div>
-    </section>
-
-    <section class="section-heading" id="catalogo">
-      <div>
-        <p class="eyebrow">NUESTROS PRODUCTOS</p>
-        <h2>Elige tus favoritos</h2>
-        <p class="catalog-subtitle">Productos reales de AGUILA STORE, listos para enviar a todo Estados Unidos.</p>
-      </div>
-      <div class="controls">
-        <label class="search-box">
-          <span aria-hidden="true"></span>
-          <input id="searchInput" type="search" placeholder="Buscar productos">
-        </label>
-        <select id="sortSelect" aria-label="Ordenar productos">
-          <option value="featured">Nuestros paquetes</option>
-          <option value="priceLow">Menor precio</option>
-          <option value="priceHigh">Mayor precio</option>
-          
-        </select>
+  <main id="contenido">
+    <section class="hero" id="inicio">
+      <div class="wrap hero-inner">
+        <div>
+          <p class="eyebrow">PEQUEÑOS DETALLES. GRANDES ALEGRÍAS.</p>
+          <h1>Detalles para regalar.<br><em>Motivos para sonreír.</em></h1>
+          <p class="hero-description">Libretas para guardar tus ideas. Bufandas para celebrar con tu mascota. Descubre un detalle con espíritu navideño.</p>
+          <div class="hero-actions">
+            <a href="libretas.html" class="button gold">Ver libretas <span data-arrow></span></a>
+            <a href="bufanda.html" class="button outline">Ver bufandas <span data-arrow></span></a>
+          </div>
+          <div class="hero-signoff"><span>AGUILA STORE</span><span>DESDE FORT MYERS, FLORIDA</span></div>
+        </div>
+        <div class="hero-art" aria-label="Explora nuestros productos">
+          <a class="art-card primary" href="libretas.html" aria-label="Explorar libretas navideñas">
+            <img src="libretas-navidad-disenos.jpg" alt="Set de cuatro mini libretas navideñas" width="400" height="280" fetchpriority="high">
+            <div class="art-caption"><div><small>PARA UNA BUENA IDEA</small>Libretas navideñas</div><span data-arrow></span></div>
+          </a>
+          <a class="art-card secondary" href="bufanda.html" aria-label="Explorar bufandas para mascotas">
+            <img src="bufanda-santa.jpg" alt="Bufanda roja para mascotas con motivo de Santa Claus" width="320" height="255">
+            <div class="art-caption"><div><small>PARA TU COMPAÑERO</small>Bufandas para mascotas</div><span data-arrow></span></div>
+          </a>
+          <div class="art-seal"><span data-icon="gift"></span>Un detalle, muchas sonrisas.</div>
+        </div>
       </div>
     </section>
 
-    <section class="category-tabs" aria-label="Categorias">
-      <button class="tab active" type="button" data-category="Todos">Todos</button>
-      <button class="tab" type="button" data-category="Invierno">Invierno</button>
-      <button class="tab" type="button" data-category="Navidad">Navidad</button>
-      <button class="tab" type="button" data-category="Mascotas">Mascotas</button>
-    </section>
-
-    <section class="product-grid" id="productGrid" aria-live="polite"></section>
-
-    <section class="section-heading" id="colores">
-      <div>
-        <p class="eyebrow">Galería</p>
-        <h2>Conoce los colores y cómo se usan</h2>
+    <section class="intro-strip" aria-label="Explora la colección">
+      <div class="wrap">
+        <div class="intro-item"><span data-icon="gift"></span><div><strong>Fotografías reales</strong><span>Conoce los productos antes de elegir</span></div></div>
+        <div class="intro-item"><span data-icon="heart"></span><div><strong>Compra segura con Stripe</strong><span>Pago en línea con Stripe Checkout</span></div></div>
+        <div class="intro-item"><span data-icon="photo"></span><div><strong>Envío a todo Estados Unidos</strong><span>Tarifa fija de $3.99</span></div></div>
       </div>
     </section>
-    
 
-    <section class="offers-band" id="ofertas">
-      <div>
+    <section class="wrap catalog" id="catalogo" aria-labelledby="catalog-title">
+      <span id="productos"></span>
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">LA COLECCIÓN</p>
+          <h2 id="catalog-title">Encuentra tu próximo detalle.</h2>
+          <p>Elige un producto y conócelo de cerca.</p>
+        </div>
+      </div>
+      <div class="catalog-controls">
+        <div class="category-tabs" aria-label="Categorias">
+          <button class="tab active" type="button" data-category="Todos">Todos</button>
+          <button class="tab" type="button" data-category="Invierno">Invierno</button>
+          <button class="tab" type="button" data-category="Navidad">Navidad</button>
+          <button class="tab" type="button" data-category="Mascotas">Mascotas</button>
+        </div>
+        <div class="controls">
+          <label class="search-box">
+            <span aria-hidden="true"></span>
+            <input id="searchInput" type="search" placeholder="Buscar productos">
+          </label>
+          <select id="sortSelect" aria-label="Ordenar productos">
+            <option value="featured">Nuestros paquetes</option>
+            <option value="priceLow">Menor precio</option>
+            <option value="priceHigh">Mayor precio</option>
+          </select>
+        </div>
+      </div>
+      <section class="product-grid" id="productGrid" aria-live="polite"></section>
+    </section>
+
+    <section class="stripe-band" id="ofertas">
+      <div class="wrap">
         <p class="eyebrow">Compra segura</p>
         <h2>Compra segura con Stripe</h2>
         <p>Puedes explorar nuestros productos, añadirlos al carrito y pagar en línea con Stripe Checkout: pago seguro y envío a todo Estados Unidos.</p>
       </div>
     </section>
 
-    <section class="why-buy" id="por-que" aria-label="Por qué comprar en AGUILA STORE">
-      <div class="section-heading compact">
-        <div>
-          <p class="eyebrow">NUESTRA TIENDA</p>
-          <h2>Una experiencia simple, clara y confiable</h2>
-        </div>
+    <section class="why-section wrap" id="por-que" aria-label="Por qué comprar en AGUILA STORE">
+      <div>
+        <p class="eyebrow" style="color:#9c6f18">NUESTRA TIENDA</p>
+        <h2 style="font-family:Georgia,serif;font-size:38px;letter-spacing:-.03em;font-weight:400;line-height:1.15">Una experiencia simple, clara y confiable</h2>
       </div>
       <div class="why-grid">
         <article><strong>Productos que puedes ver</strong><p>Fotografías del producto y descripciones con información sobre unidades, uso y colores disponibles.</p></article>
@@ -119,24 +125,59 @@
         <article><strong>Compra sin complicaciones</strong><p>Busca, compara y organiza tu carrito con pago en línea en nuestro checkout seguro.</p></article>
       </div>
     </section>
+
+    <section class="about" id="tienda" aria-labelledby="about-title">
+      <div class="wrap about-inner">
+        <div class="about-logo"><img src="logo-bandera-en.png" alt="Logo original de AGUILA STORE: águila con bandera estadounidense" width="160" height="160" loading="lazy"></div>
+        <div>
+          <p class="eyebrow">NUESTRA TIENDA</p>
+          <h2 id="about-title">Una tienda.<br>Pequeñas grandes ideas.</h2>
+        </div>
+        <div class="about-copy">AGUILA STORE reúne detalles para el día a día y para compartir. Desde Fort Myers, Florida, una invitación a descubrir algo especial, empezando por lo sencillo.<a class="text-link" href="#catalogo">Explora la colección <span data-arrow></span></a></div>
+      </div>
+    </section>
+
+    <section class="wrap faq" id="preguntas" aria-labelledby="faq-title">
+      <div class="faq-inner">
+        <div>
+          <p class="eyebrow">ANTES DE COMPRAR</p>
+          <h2 id="faq-title">Cada detalle, más claro.</h2>
+        </div>
+        <div>
+          <details>
+            <summary>¿Cómo puedo ver cada producto?</summary>
+            <p>En el catálogo, toca la fotografía o el nombre de un producto para abrir su ficha, con sus presentaciones y precios. Desde la portada también llegas a las fichas completas de <a href="libretas.html">libretas</a> y <a href="bufanda.html">bufandas</a>.</p>
+          </details>
+          <details>
+            <summary>¿Puedo ver las fotos ampliadas?</summary>
+            <p>Sí. En la ficha de cada producto, las miniaturas cambian la fotografía principal y puedes ampliarla para verla en grande. En las bufandas también puedes explorar cada uno de los cuatro diseños.</p>
+          </details>
+          <details>
+            <summary>¿Cómo compro y cuánto cuesta el envío?</summary>
+            <p>Añade los productos al carrito y paga en línea con Stripe Checkout. El envío es una tarifa fija de $3.99 a todo Estados Unidos y los impuestos se calculan al pagar. Tienes el detalle en la <a href="envio.html">política de envío</a> y en la de <a href="devoluciones.html">devoluciones</a>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer" id="aliados">
-    <div>
-      <a class="brand footer-brand" href="#inicio" aria-label="AGUILA STORE inicio">
-        <img src="logo-bandera-en.png" alt="AGUILA STORE" class="brand-mark">
-        <span>AGUILA STORE</span>
-      </a>
-      <p>Selección de productos para tu día a día. Compra en línea con pago seguro y envío a todo Estados Unidos.</p>
-    </div>
-    <div>
-      <p class="eyebrow">INFORMACIÓN Y AYUDA</p>
-      <div class="ally-grid">
-        <a href="envio.html">Envíos</a>
-        <a href="devoluciones.html">Devoluciones</a>
-        <a href="privacidad.html">Privacidad</a>
-        <a href="condiciones.html">Condiciones</a>
-        <a href="contacto.html">Contacto</a>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="index.html#inicio"><img src="logo-bandera-en.png" alt="" width="41" height="41"><span class="brand-name">AGUILA STORE</span></a>
+        <nav class="footer-links" aria-label="Información y productos">
+          <a href="libretas.html">Libretas navideñas</a>
+          <a href="bufanda.html">Bufandas para mascotas</a>
+          <a href="envio.html">Envíos</a>
+          <a href="devoluciones.html">Devoluciones</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="condiciones.html">Condiciones</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>AGUILA STORE · Fort Myers, Florida</span>
+        <span>Selección de productos para tu día a día. Compra en línea con pago seguro y envío a todo Estados Unidos.</span>
       </div>
     </div>
   </footer>
@@ -178,8 +219,6 @@
     </div>
   </aside>
 
-
-
   <!-- Una única ventana nativa: sin anclas/animaciones ni capas fantasma de la miniatura. -->
   <dialog id="galleryViewer" class="gallery-viewer" aria-labelledby="galleryViewerTitle">
     <form method="dialog" class="gallery-viewer-close-form">
@@ -213,6 +252,7 @@
       </div>
     </div>
   </dialog>
+
   <template id="productTemplate">
     <article class="product-card product-featured-card">
       <div class="product-media">
@@ -243,6 +283,24 @@
     </article>
   </template>
 
-  <script src="app.js?v=20261102-1"></script>
+  <noscript><p class="nojs">Para ver el catálogo y comprar, activa JavaScript. Puedes conocer los productos en sus fichas: <a href="libretas.html">libretas</a> y <a href="bufanda.html">bufandas</a>.</p></noscript>
+
+  <script src="app.js?v=20261102-2"></script>
+  <script>
+    const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>';
+    const icons = {
+      gift: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 11h16v10H4zM3 7h18v4H3zM12 7v14"/><path d="M12 7C3 8 5-2 10 4l2 3c9 1 7-9 2-3z"/></svg>',
+      photo: '<svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8" cy="9" r="1.5"/><path d="m3 17 6-5 4 4 3-3 5 5"/></svg>',
+      heart: '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 5c-3-3-6 0-8 2-2-2-5-5-8-2s-1 6 1 8l7 7 7-7c2-2 4-5 1-8Z"/></svg>'
+    };
+    document.querySelectorAll('[data-arrow]').forEach(el => el.innerHTML = arrow);
+    document.querySelectorAll('[data-icon]').forEach(el => el.innerHTML = icons[el.dataset.icon] || '');
+    const toggle = document.querySelector('.menu-toggle'), nav = document.querySelector('.nav');
+    function closeMenu() { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Abrir menú'); }
+    toggle.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; nav.classList.toggle('open', open); toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú'); });
+    nav.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { closeMenu(); toggle.focus(); } });
+    document.addEventListener('click', e => { if (!e.target.closest('.site-header')) closeMenu(); });
+  </script>
 </body>
 </html>

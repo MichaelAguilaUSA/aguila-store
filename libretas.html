@@ -12,25 +12,8 @@
   <meta property="og:url" content="https://michaelaguilausa.github.io/aguila-store/libretas.html">
   <meta property="og:image" content="https://michaelaguilausa.github.io/aguila-store/libretas-navidad-principal.jpg">
   <meta name="twitter:card" content="summary">
-  <style>
-:root{--navy:#14243c;--red:#bd2338;--gold:#d4af37;--cream:#faf6ef;--ink:#22303f}
-*{box-sizing:border-box}body{margin:0;font-family:Georgia,'Times New Roman',serif;background:var(--cream);color:var(--ink)}
-header{background:var(--navy);padding:14px 20px;display:flex;align-items:center;gap:14px}
-header img{width:52px;height:52px;border-radius:50%}
-header .brand{color:#fff;font-size:22px;letter-spacing:2px}
-header a.volver{margin-left:auto;color:var(--gold);text-decoration:none;font-size:15px}
-main{max-width:880px;margin:0 auto;padding:28px 20px 40px}
-h1{color:var(--navy);font-size:30px;margin:6px 0 4px}
-.sub{color:#5a6a7a;margin:0 0 18px;font-style:italic}
-.gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0}
-.gal img{width:100%;border-radius:10px;border:1px solid #e3dccb;background:#fff}
-.precio{background:#fff;border:1px solid #e3dccb;border-left:5px solid var(--gold);border-radius:10px;padding:16px 18px;margin:18px 0}
-.precio .p{font-size:26px;color:var(--navy);font-weight:bold}
-.cta{display:inline-block;background:var(--red);color:#fff;text-decoration:none;padding:13px 26px;border-radius:8px;font-size:17px;margin-top:10px}
-ul{line-height:1.65}
-footer{background:var(--navy);color:#cfd8e3;text-align:center;padding:18px;font-size:14px}
-footer a{color:var(--gold);text-decoration:none}
-</style>
+  <link rel="icon" type="image/png" href="logo-bandera-en.png">
+  <link rel="stylesheet" href="diseno-2.0.css?v=20261102-2">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,34 +40,146 @@ footer a{color:var(--gold);text-decoration:none}
   </script>
 </head>
 <body>
-  <header>
-    <img src="logo-bandera-en.png" alt="AGUILA STORE">
-    <span class="brand">AGUILA STORE</span>
-    <a class="volver" href="index.html">← Volver a la tienda</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html#inicio" aria-label="AGUILA STORE, inicio">
+        <img src="logo-bandera-en.png" alt="" width="49" height="49">
+        <span class="brand-name">AGUILA STORE<small>VISIÓN · FUERZA · TRADICIÓN</small></span>
+      </a>
+      <nav class="nav" id="main-nav" aria-label="Navegación principal">
+        <a href="index.html#inicio">Inicio</a>
+        <a href="index.html#catalogo">Productos</a>
+        <a href="index.html#tienda">La tienda</a>
+      </nav>
+      <div class="header-cta">
+        <button type="button" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      </div>
+    </div>
   </header>
-  <main>
-    <h1>Libretas navideñas mini — Set de 4</h1>
-    <p class="sub">Cuatro diseños festivos · 80 hojas cada una</p>
-    <div class="gal">
-      <img src="libretas-navidad-principal.jpg" alt="Libretas navideñas mini — Set de 4 — AGUILA STORE" loading="lazy">
-      <img src="libretas-navidad-disenos.jpg" alt="Libretas navideñas mini — Set de 4 — AGUILA STORE" loading="lazy">
-      <img src="04-abanico.jpg" alt="Libretas navideñas mini — Set de 4 — AGUILA STORE" loading="lazy">
+
+  <main id="contenido">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Ruta de navegación">
+        <a href="index.html#inicio">Inicio</a><span aria-hidden="true">/</span><a href="index.html#catalogo">Productos</a><span aria-hidden="true">/</span><span aria-current="page">Libretas navideñas</span>
+      </nav>
+      <div class="detail">
+        <div class="detail-layout">
+          <div>
+            <div class="gallery-main">
+              <button id="open-photo" type="button" aria-label="Ampliar fotografía del producto">
+                <img id="main-photo" src="libretas-navidad-principal.jpg" alt="Tarjeta del set de 4 libretas navideñas de AGUILA STORE" width="650" height="440" fetchpriority="high">
+              </button>
+              <span class="zoom-label"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6M7 10h6m-3-3v6"/></svg> Ampliar foto</span>
+            </div>
+            <div class="thumbs" role="group" aria-label="Fotografías del producto">
+              <button type="button" class="thumb" data-photo="0" aria-label="Ver Presentación" aria-pressed="true"><img src="libretas-navidad-principal.jpg" alt="" width="70" height="70"></button>
+              <button type="button" class="thumb" data-photo="1" aria-label="Ver Los 4 diseños" aria-pressed="false"><img src="libretas-navidad-disenos.jpg" alt="" width="70" height="70"></button>
+              <button type="button" class="thumb" data-photo="2" aria-label="Ver Detalle de hojas" aria-pressed="false"><img src="04-abanico.jpg" alt="" width="70" height="70"></button>
+            </div>
+            <p class="visually-hidden" id="photo-status" role="status"></p>
+          </div>
+          <div class="detail-copy">
+            <p class="eyebrow">UN DETALLE PARA ESCRIBIR</p>
+            <h1>Libretas navideñas mini — Set de 4</h1>
+            <p class="detail-lead">Cuatro mini libretas con diseños navideños, hojas en blanco y aro metálico. Un pequeño espacio para una idea, una nota o un recuerdo.</p>
+            <dl class="specs">
+              <div><dt>Presentación</dt><dd>Set de 4 libretas</dd></div>
+              <div><dt>Formato</dt><dd>70 × 70 mm</dd></div>
+              <div><dt>Interior</dt><dd>80 hojas por libreta</dd></div>
+              <div><dt>Encuadernación</dt><dd>Aro metálico</dd></div>
+            </dl>
+            <div class="detail-note">Se presentan en paquete con tarjeta kraft y cordón de yute, listas para regalar.</div>
+            <div class="price-box">
+              <span class="p">Set de 4: $14.99</span>
+              <p>Envío fijo $3.99 a todo Estados Unidos · Entrega estimada: 2 a 5 días laborables.</p>
+              <a class="cta" href="index.html#catalogo">Comprar en la tienda</a>
+            </div>
+            <p class="contact-line">¿Dudas? Escríbenos por WhatsApp Business <strong>(656) 222-0119</strong> (solo mensajes de texto) o a michaelaguila117@gmail.com.</p>
+            <div class="detail-actions">
+              <a class="button dark" href="index.html#catalogo">Volver a productos <span data-arrow></span></a>
+              <a class="button light" href="bufanda.html">Explorar bufandas</a>
+            </div>
+          </div>
+        </div>
+
+        <section class="detail-list" aria-labelledby="caracteristicas-title">
+          <h2 id="caracteristicas-title">Características</h2>
+          <ul>
+            <li>Medida: 70 × 70 mm</li>
+            <li>80 hojas por libreta</li>
+            <li>Aro metálico con bisagra en el ojal de la esquina</li>
+            <li>El set trae una libreta de cada diseño (4 diseños)</li>
+            <li>Presentación artesanal de AGUILA STORE con tarjeta kraft y cordón de yute</li>
+          </ul>
+        </section>
+
+        <div class="other-product">
+          <p>Sigue descubriendo pequeños detalles.</p>
+          <a class="text-link" href="bufanda.html">Ver bufandas para mascotas <span data-arrow></span></a>
+        </div>
+      </div>
     </div>
-    <h2>Características</h2>
-    <ul>
-      <li>Medida: 70 × 70 mm</li>
-      <li>80 hojas por libreta</li>
-      <li>Aro metálico con bisagra en el ojal de la esquina</li>
-      <li>El set trae una libreta de cada diseño (4 diseños)</li>
-      <li>Presentación artesanal de AGUILA STORE con tarjeta kraft y cordón de yute</li>
-    </ul>
-    <div class="precio">
-      <span class="p">Set de 4: $14.99</span>
-      <p>Envío fijo $3.99 a todo Estados Unidos · Entrega estimada: 2 a 5 días laborables.</p>
-      <a class="cta" href="index.html#catalogo">Comprar en la tienda</a>
-    </div>
-    <p>¿Dudas? Escríbenos por WhatsApp Business <strong>(656) 222-0119</strong> (solo mensajes de texto) o a michaelaguila117@gmail.com.</p>
+    <dialog class="photo-dialog" aria-label="Fotografía ampliada del producto">
+      <button type="button" class="close-photo" aria-label="Cerrar fotografía ampliada">×</button>
+      <img id="large-photo" src="libretas-navidad-principal.jpg" alt="Tarjeta del set de 4 libretas navideñas de AGUILA STORE">
+      <p id="large-caption">Presentación</p>
+    </dialog>
   </main>
-  <footer>AGUILA STORE · Fort Myers, Florida · <a href="index.html">michaelaguilausa.github.io/aguila-store</a></footer>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <a class="brand" href="index.html#inicio"><img src="logo-bandera-en.png" alt="" width="41" height="41"><span class="brand-name">AGUILA STORE</span></a>
+        <nav class="footer-links" aria-label="Información y productos">
+          <a href="libretas.html">Libretas navideñas</a>
+          <a href="bufanda.html">Bufandas para mascotas</a>
+          <a href="envio.html">Envíos</a>
+          <a href="devoluciones.html">Devoluciones</a>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="condiciones.html">Condiciones</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>AGUILA STORE · Fort Myers, Florida</span>
+        <span>Compra en línea con pago seguro y envío a todo Estados Unidos.</span>
+      </div>
+    </div>
+  </footer>
+
+  <noscript><p class="nojs">Activa JavaScript para ampliar las fotografías. Puedes <a href="index.html#catalogo">volver a productos</a>.</p></noscript>
+
+  <script>
+    const arrow = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></svg>';
+    document.querySelectorAll('[data-arrow]').forEach(el => el.innerHTML = arrow);
+    const toggle = document.querySelector('.menu-toggle'), nav = document.querySelector('.nav');
+    function closeMenu() { nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Abrir menú'); }
+    toggle.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') !== 'true'; nav.classList.toggle('open', open); toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú'); });
+    nav.addEventListener('click', e => { if (e.target.closest('a')) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { closeMenu(); toggle.focus(); } });
+    document.addEventListener('click', e => { if (!e.target.closest('.site-header')) closeMenu(); });
+
+    const PHOTOS = [
+      ['libretas-navidad-principal.jpg', 'Presentación', 'Tarjeta del set de 4 libretas navideñas de AGUILA STORE'],
+      ['libretas-navidad-disenos.jpg', 'Los 4 diseños', 'Las cuatro libretas navideñas con sus diseños: Santa, muñeco de nieve, oso y reno'],
+      ['04-abanico.jpg', 'Detalle de hojas', 'Libreta navideña de muñeco de nieve abierta en abanico mostrando las hojas']
+    ];
+    const main = document.querySelector('#main-photo'), large = document.querySelector('#large-photo'), dialog = document.querySelector('.photo-dialog');
+    let selected = 0;
+    function showPhoto(i) {
+      selected = i; const im = PHOTOS[i];
+      main.src = im[0]; main.alt = im[2];
+      document.querySelectorAll('[data-photo]').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.photo) === i)));
+      document.querySelector('#photo-status').textContent = 'Fotografía: ' + im[1];
+    }
+    document.querySelectorAll('[data-photo]').forEach(b => b.addEventListener('click', () => showPhoto(Number(b.dataset.photo))));
+    document.querySelector('#open-photo').addEventListener('click', () => {
+      large.src = main.src; large.alt = main.alt;
+      document.querySelector('#large-caption').textContent = PHOTOS[selected][1];
+      dialog.showModal();
+    });
+    document.querySelector('.close-photo').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', e => { if (e.target === dialog) { const r = dialog.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dialog.close(); } });
+  </script>
 </body>
 </html>
