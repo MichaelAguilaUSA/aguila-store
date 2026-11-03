@@ -679,9 +679,21 @@ function updateDialogPack() {
   dialogTitle.textContent = product.cardTitle;
 }
 
+function dialogOptionsFor(opened) {
+  if (!opened) return products.filter(p => !p.cardOnly);
+  if (opened.cardOnly || opened.variant) {
+    const prefix = opened.id.split("-")[0] + "-";
+    return products.filter(p => p.variant && p.id.startsWith(prefix));
+  }
+  return [opened];
+}
+
 function openProductDialog(productId, photo) {
   if (!productDialog || typeof productDialog.showModal !== "function") return;
   const openedProduct = products.find(p => p.id === productId);
+  if (dialogPack) {
+    dialogPack.replaceChildren(...dialogOptionsFor(openedProduct).map(p => new Option(p.dialogOption, p.id)));
+  }
   dialogPack.value = openedProduct ? (openedProduct.cardOnly ? openedProduct.defaultOption : openedProduct.id) : products[0].id;
   updateDialogPack();
   const product = products.find(p => p.id === dialogProductId);
